@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import "./Hero.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   animateReveal,
   applyRevealAnimation,
   loader,
 } from "../../Utils/animationsUtils";
 import Navbar from "../Navbar";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 // import DisplayHeader from "../DisplayHeader";
 const Hero = () => {
   useEffect(() => {
@@ -17,7 +19,7 @@ const Hero = () => {
       <Navbar />
       <div id="loader" className="w-full h-screen relative z-[9]">
         <div className="flex flex-col items-center justify-center">
-          <h5 className="reveal">AI & ML</h5>
+          <h5 className="reveal text-4xl">AI & ML</h5>
           <h5 className="reveal">&copy; 2024</h5>
         </div>
         <h1 className="reveal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[5.5vw]">
@@ -26,12 +28,17 @@ const Hero = () => {
         </h1>
       </div>
       <div id="green"></div>
-      <div id="section1" className="flex">
-        <h1 className="">AI & ML</h1>
-        <h1 className="flex justify-center items-center ">
+
+      <div id="section1" className="grid min-h-screen ">
+        <h1 className="text-center sm:text-9xl text-[11vw] ">AI & ML</h1>
+        <h1 className="flex justify-center items-center md:text-9xl text-[11vw] ">
           Devel
           <span>
-            <svg class="c-bttn__morph" fill="none" viewBox="0 0 131 136">
+            <svg
+              className="c-bttn__morph text-9xl"
+              fill="none"
+              viewBox="0 0 131 136"
+            >
               <path
                 className="g-path"
                 data-morph="end"
@@ -49,21 +56,28 @@ const Hero = () => {
           </span>
           per
         </h1>
-        <div className="w-full flex items-center justify-center gap-5 p-5">
-          {["Data Science", "Machine Learning", "and", "Web Development"].map(
+        <div className="w-full grid justify-items-center justify-around sm:grid-cols-3 md:grid-cols-3 md:px-[10vw] lg:px-[17vw] gap-2 pt-[4vh] ">
+          {["Data Science", "Machine Learning", "Web Development"].map(
             (item, index) => {
               return (
                 <div
                   key={index}
-                  className={`w-fit px-2  text-white  ${
-                    index !== 2 && "rounded-full border-2 border-zinc-100"
-                  } `}
+                  className={`px-3 py-2 text-white rounded-full border-2 border-zinc-100`}
                 >
                   {item}
                 </div>
               );
             }
           )}
+        </div>
+        <div className="flex  flex-col gap-3 sm:flex-row justify-center mt-8 pb-4">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded min-w-[8vw]">
+            Let's Connect
+          </button>
+          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded flex gap-4 ">
+            <FontAwesomeIcon icon={faDownload} />
+            <div className="ml-1">Resume</div>
+          </button>
         </div>
       </div>
     </div>

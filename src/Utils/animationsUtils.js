@@ -54,7 +54,7 @@ export function loader(){
         duration:1
     })
     tl.to("#navbar",{
-        height: "4vh",
+        height: "fit-content",
         duration: 1,
         stagger: 0.1
     })
