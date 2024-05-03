@@ -108,7 +108,12 @@
     right: 0;
     z-index: 2;
 }
-
+.image-container{
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+    overflow:  hidden;
+}
 
 /* ------------------------------- About Section -------------------------- */
 
