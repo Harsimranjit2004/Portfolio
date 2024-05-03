@@ -7,7 +7,7 @@ import {
   loader,
 } from "../../Utils/animationsUtils";
 import Navbar from "../Navbar";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 // import DisplayHeader from "../DisplayHeader";
 const Hero = () => {
   useEffect(() => {
@@ -15,7 +15,7 @@ const Hero = () => {
     loader();
   }, []);
   const content = (
-    <div className="hero__main bg-zinc-800 text-white">
+    <div className="hero__main text-white">
       <Navbar />
       <div id="loader" className="w-full h-screen relative z-[9]">
         <div className="flex flex-col items-center justify-center">
@@ -29,7 +29,7 @@ const Hero = () => {
       </div>
       <div id="green"></div>
 
-      <div id="section1" className="grid min-h-screen ">
+      <div id="section1" className="grid min-h-screen border-b border-gray-700">
         <h1 className="text-center sm:text-9xl text-[11vw] ">AI & ML</h1>
         <h1 className="flex justify-center items-center md:text-9xl text-[11vw] ">
           Devel
@@ -71,10 +71,11 @@ const Hero = () => {
           )}
         </div>
         <div className="flex  flex-col gap-3 sm:flex-row justify-center mt-8 pb-4">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded min-w-[8vw]">
-            Let's Connect
+          <button className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex gap-4">
+            <div className="ml-1"> Let's Connect</div>
+            <FontAwesomeIcon icon={faArrowRight} />
           </button>
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded flex gap-4 ">
+          <button className="border-2 border-green-500 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded flex gap-4 ">
             <FontAwesomeIcon icon={faDownload} />
             <div className="ml-1">Resume</div>
           </button>
