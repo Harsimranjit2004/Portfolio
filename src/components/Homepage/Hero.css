@@ -117,3 +117,43 @@
 
 /* ------------------------------- About Section -------------------------- */
 
+/*-------------------------------- Projects Section ---------------------- */ 
+
+
+.project__filter {
+    color: #6bffd8; /* Light blue color for the filter text */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    margin: 2rem 0 2rem;
+ }
+ 
+ .projects__filter__item {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #1c1c1c;
+    color: #6bffd8; /* Light blue text color for filter items */
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0.5rem;
+ }
+ 
+ .projects__filter__item:hover {
+    background-color: #6bffd8; /* Light blue background on hover */
+    color: #fff; /* White text color on hover */
+ }
+ 
+ .item-active {
+    background-color: #6bffd8; /* Light blue background for active item */
+    color: #fff; /* White text color for active item */
+ }
+ 
+ .project__flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+ 
