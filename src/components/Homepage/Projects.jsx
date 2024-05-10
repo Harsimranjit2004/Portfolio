@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useGetProjectQuery } from "../../features/projectsApiSlice";
+import { motion } from "framer-motion";
+import Project from "./Project";
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [animateCart, setAnimateCart] = useState({ y: 0, opacity: 1 });
@@ -16,9 +18,9 @@ const Projects = () => {
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
   });
-  console.log(data);
+  // console.log(data);
   return (
-    <div className="h-screen text-white">
+    <div className=" text-white">
       <div className="heading-container">
         <h1 className="p-4 pt-6 text-center text-5xl">
           My Creative{"  "}
@@ -32,10 +34,11 @@ const Projects = () => {
           "Machine Learning",
           "Web Development",
           "Data Science",
+          "All",
         ].map((item, index) => (
           <div
             key={`${item}-${index}`}
-            onClick={handleFilter}
+            onClick={() => handleFilter(item)}
             className={`projects__filter__item ${
               activeFilter === item ? "item-active" : ""
             }`}
@@ -44,6 +47,18 @@ const Projects = () => {
           </div>
         ))}
       </div>
+      <motion.div
+        animate={animateCart}
+        transition={{ duration: 0.5, delayChildren: 0.5 }}
+        className="work__portfolio gap-5 p-4 pb-6"
+      >
+        {data?.ids?.map(
+          (item, index) =>
+            data?.entities[item].tags.includes(activeFilter) && (
+              <Project id={item} key={index} filter={activeFilter} />
+            )
+        )}
+      </motion.div>
     </div>
   );
 };

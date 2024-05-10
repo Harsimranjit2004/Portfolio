@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import ProjectDetail from "./components/Homepage/ProjectDetail";
+import UpdateProject from "./components/Homepage/UpdateProject";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index path="/" element={<Home />} />
         <Route path="project/:projectId" element={<ProjectDetail />} />
+        <Route path="project-update/:projectId" element={<UpdateProject />} />
       </Route>
     </Routes>
   );

@@ -77,10 +77,10 @@ const Footer = () => {
           <div className="text-xl ">
             {menuItems.map((item) => (
               <div className="" key={item.name}>
-                {/* <Link className="footer__navitems" to={item.path}>
+                <Link className="footer__navitems" to={item.path}>
                   {item.name}
-                </Link> */}
-                <a href={item.path}>{item.name}</a>
+                </Link>
+                {/* <a href={item.path}>{item.name}</a>  */}
               </div>
             ))}
           </div>
