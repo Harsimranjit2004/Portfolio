@@ -20,7 +20,11 @@ const Projects = () => {
   });
   // console.log(data);
   return (
-    <div className=" text-white border-b border-gray-700">
+    <div
+      data-scroll
+      data-scroll-speed=".1"
+      className=" h-auto text-white border-b border-gray-700"
+    >
       <div className="heading-container">
         <h1 className="p-4 pt-6 text-center text-5xl">
           My Creative{"  "}

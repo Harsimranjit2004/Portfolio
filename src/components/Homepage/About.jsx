@@ -5,6 +5,8 @@ import myImage from "../../assets/myImg.png";
 const About = () => {
   return (
     <div
+      data-scroll
+      data-scroll-speed=".2"
       className="text-white h-auto w-max-[1200px] pb-5 border-b border-gray-700"
       id="about"
     >

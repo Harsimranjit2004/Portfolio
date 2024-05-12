@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import ProjectDetail from "./components/Homepage/ProjectDetail";
 import UpdateProject from "./components/Homepage/UpdateProject";
+import Admin from "./Pages/Admin";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route index path="/" element={<Home />} />
         <Route path="project/:projectId" element={<ProjectDetail />} />
         <Route path="project-update/:projectId" element={<UpdateProject />} />
+        <Route path="/admin" element={<Admin />} />
       </Route>
     </Routes>
   );

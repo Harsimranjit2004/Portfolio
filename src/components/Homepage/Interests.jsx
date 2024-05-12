@@ -9,8 +9,8 @@ const Interests = () => {
     refetchOnMountOrArgChange: true,
   });
   return (
-    <div>
-      <div className="text-white  border-b border-gray-700">
+    <div data-scroll data-scroll-speed=".1" className="h-auto">
+      <div className="text-white  ">
         <div className="heading_container">
           <h2 className="p-4 pt-6 text-center text-5xl">
             Areas of <span className="text-green-500">Interest</span>
@@ -21,7 +21,7 @@ const Interests = () => {
             Take a look at some of the things I love working on
           </p>
         </div>
-        <div className="container sm:pt-[70px] pt-[40px] work__portfolio gap-5 p-4 pb-6">
+        <div className="container sm:pt-[70px] pt-[40px]   work__portfolio gap-5 p-4 pb-6">
           {data?.ids?.map((item, index) => (
             <Interest id={item} key={index} />
           ))}
