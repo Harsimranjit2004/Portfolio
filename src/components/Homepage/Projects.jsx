@@ -20,7 +20,7 @@ const Projects = () => {
   });
   // console.log(data);
   return (
-    <div className=" text-white">
+    <div className=" text-white border-b border-gray-700">
       <div className="heading-container">
         <h1 className="p-4 pt-6 text-center text-5xl">
           My Creative{"  "}

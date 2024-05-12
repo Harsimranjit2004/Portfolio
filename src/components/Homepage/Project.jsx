@@ -1,20 +1,19 @@
 import React from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+// import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRight, faEye } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { projectApiSlice } from "../../features/projectsApiSlice";
 import { useNavigate } from "react-router-dom";
 import "./Hero.css";
 const Project = ({ id, filter }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { project } = projectApiSlice.useGetProjectQuery(undefined, {
     selectFromResult: ({ data }) => ({
       project: data?.entities[id],
     }),
   });
-  console.log(project);
   //   const [deleteProject] = useDeleteProjectMutation();
   //   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   //   const handleUpdateButton = () => {
