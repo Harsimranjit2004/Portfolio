@@ -68,7 +68,6 @@ const CreateProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     await addNewProject({ ...formData });
     // Handle form submission, e.g., send data to backend or perform validation
   };
