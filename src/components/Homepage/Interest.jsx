@@ -23,7 +23,11 @@ const Interest = ({ id }) => {
   return (
     <div className="glass w-[320px] h-[300px] flex align-center justify-center flex-col">
       <div className="w-[100px] h-[100px] ">
-        <img src={Icon} className="w-full h-full object-cover" alt="" />
+        <img
+          src={interest?.img}
+          className="w-full h-full object-cover"
+          alt=""
+        />
       </div>
       <div className="pt-4">
         <h2 className="text-center text-bold text-[4vh] ">{interest?.title}</h2>

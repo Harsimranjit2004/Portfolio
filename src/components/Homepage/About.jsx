@@ -2,7 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import myImage from "../../assets/myImg.png";
+import { useNavigate } from "react-router-dom";
 const About = () => {
+  const navigate = useNavigate();
   return (
     <div
       data-scroll
@@ -17,7 +19,10 @@ const About = () => {
       </div>
       <div className="md:grid md:grid-cols-2 sm:py-16 md:pl-20">
         <div className="mt-4 md:mt-0 text-left flex text-center justify-around">
-          <div className="my-auto mx-6 flex flex-col">
+          <div
+            className="my-auto mx-6 flex flex-col align-center justify-center  "
+            style={{ alignItems: "center" }}
+          >
             <h2 className="text-4xl font-bold mb-4 text-white">
               I'm <span className="text-green-500">Harsimranjit Singh</span>
             </h2>
@@ -38,7 +43,10 @@ const About = () => {
                 <div>2+</div>
               </div>
             </div>
-            <div className=" w-fit px-3 py-2  mt-10">
+            <div
+              className=" w-fit px-3 py-2  mt-10 flex align-center justify-center"
+              onClick={() => navigate("/About")}
+            >
               <button className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex gap-4">
                 <div className="ml-1"> Let's Connect</div>
                 <FontAwesomeIcon icon={faArrowRight} />

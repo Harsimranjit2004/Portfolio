@@ -9,6 +9,7 @@ import ProjectDetail from "./components/Homepage/ProjectDetail";
 import UpdateProject from "./components/Homepage/UpdateProject";
 import Admin from "./Pages/Admin";
 import UpdateInterest from "./components/Homepage/UpdateInterest";
+import About from "./Pages/About";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   return (
@@ -27,6 +28,7 @@ const App = () => {
           element={<UpdateInterest />}
         />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/About" element={<About />} />
       </Route>
     </Routes>
   );

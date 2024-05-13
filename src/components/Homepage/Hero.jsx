@@ -8,15 +8,17 @@ import {
 } from "../../Utils/animationsUtils";
 import Navbar from "../Navbar";
 import { faDownload, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 // import DisplayHeader from "../DisplayHeader";
 const Hero = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     applyRevealAnimation(".reveal");
     loader();
   }, []);
   const content = (
     <div className="hero__main text-white">
-      <Navbar />
+      <Navbar isHomePage={"yes"} />
       <div id="loader" className="w-full h-screen relative z-[9]">
         <div className="flex flex-col items-center justify-center">
           <h5 className="reveal text-4xl">AI & ML</h5>
@@ -71,7 +73,10 @@ const Hero = () => {
           )}
         </div>
         <div className="flex  flex-col gap-3 sm:flex-row justify-center mt-8 pb-4">
-          <button className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex gap-4">
+          <button
+            className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex gap-4"
+            onClick={() => navigate("/Contacts")}
+          >
             <div className="ml-1"> Let's Connect</div>
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
