@@ -74,13 +74,25 @@ const Hero = () => {
         </div>
         <div className="flex  flex-col gap-3 sm:flex-row justify-center mt-8 pb-4">
           <button
-            className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex gap-4"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex gap-4 align-center justify-center"
             onClick={() => navigate("/Contact")}
           >
             <div className="ml-1"> Let's Connect</div>
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
-          <button className="border-2 border-green-500 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded flex gap-4 ">
+          <button
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            className="border-2 border-green-500 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded flex align-center justify-center gap-4 "
+          >
             <FontAwesomeIcon icon={faDownload} />
             <div className="ml-1">Resume</div>
           </button>

@@ -95,8 +95,8 @@
     /* box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; */
  }
  
- .contact__form input,
- textarea {
+ .contact__form .input,
+ .textarea {
     width: 100%;
     padding: 0.95rem;
     border: none;

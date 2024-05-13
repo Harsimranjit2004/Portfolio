@@ -73,7 +73,7 @@ const Form = () => {
         <div className="contact__form contact__flex">
           <div className="contact__flex">
             <input
-              className="p-text"
+              className="input p-text"
               type="text"
               name="name"
               placeholder="Your name"
@@ -83,7 +83,7 @@ const Form = () => {
           </div>
           <div className="contact__flex">
             <input
-              className="p-text"
+              className="input p-text"
               type="text"
               name="email"
               placeholder="Your email"
@@ -93,7 +93,7 @@ const Form = () => {
           </div>
           <div className="contact__flex">
             <textarea
-              className="p-text p-2 text-xl"
+              className="textarea p-text p-2 text-xl"
               placeholder="Your message"
               value={message}
               name="message"

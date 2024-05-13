@@ -33,7 +33,14 @@ const About = () => {
               exercitationem, debitis, asperiores nisi. Distinctio magnam
               ducimus magni iusto quod dolores, consequuntur ullam!
             </p>
-            <div className="pt-10 flex gap-10 align-center justify-around">
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              className="pt-10 flex gap-10 align-center justify-around"
+            >
               <div className="flex flex-col border-r p-10 md:text-xl text-center">
                 <div>Project Completed</div>
                 <div>10+</div>
@@ -47,7 +54,14 @@ const About = () => {
               className=" w-fit px-3 py-2  mt-10 flex align-center justify-center"
               onClick={() => navigate("/About")}
             >
-              <button className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex gap-4">
+              <button
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex align-center justify-center gap-4"
+              >
                 <div className="ml-1"> Let's Connect</div>
                 <FontAwesomeIcon icon={faArrowRight} />
               </button>

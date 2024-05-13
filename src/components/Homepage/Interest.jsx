@@ -21,7 +21,14 @@ const Interest = ({ id }) => {
     await deleteInterest({ id });
   };
   return (
-    <div className="glass w-[320px] h-[300px] flex align-center justify-center flex-col">
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+      className="glass w-[320px] h-[300px] flex align-center justify-center flex-col"
+    >
       <div className="w-[100px] h-[100px] ">
         <img
           src={interest?.img}
