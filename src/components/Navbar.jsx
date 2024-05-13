@@ -61,6 +61,7 @@ const Navbar = ({ isHomePage }) => {
             <div className="burger">
               <FontAwesomeIcon
                 icon={faBars}
+                style={{ color: "white" }}
                 onClick={onDropDownButtonClicked}
                 className="w-[5vh]"
               />
@@ -69,6 +70,7 @@ const Navbar = ({ isHomePage }) => {
           {isSideBarOpen && (
             <div className="burger">
               <FontAwesomeIcon
+                style={{ color: "white" }}
                 icon={faClose}
                 onClick={onDropDownButtonClicked}
                 className=" "

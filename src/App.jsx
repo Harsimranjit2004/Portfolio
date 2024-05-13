@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import Navbar from "./components/Navbar";
 import LocomotiveScroll from "locomotive-scroll";
 import Footer from "./components/Footer";
+
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import ProjectDetail from "./components/Homepage/ProjectDetail";
@@ -10,6 +11,7 @@ import UpdateProject from "./components/Homepage/UpdateProject";
 import Admin from "./Pages/Admin";
 import UpdateInterest from "./components/Homepage/UpdateInterest";
 import About from "./Pages/About";
+import Contact from "./Pages/Contact";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   return (
@@ -29,6 +31,7 @@ const App = () => {
         />
         <Route path="/admin" element={<Admin />} />
         <Route path="/About" element={<About />} />
+        <Route path="Contact" element={<Contact />} />
       </Route>
     </Routes>
   );

@@ -75,7 +75,7 @@ const Hero = () => {
         <div className="flex  flex-col gap-3 sm:flex-row justify-center mt-8 pb-4">
           <button
             className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex gap-4"
-            onClick={() => navigate("/Contacts")}
+            onClick={() => navigate("/Contact")}
           >
             <div className="ml-1"> Let's Connect</div>
             <FontAwesomeIcon icon={faArrowRight} />
