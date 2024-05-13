@@ -1,14 +1,25 @@
 import React from "react";
 import Icon from "../../assets/computer-science.png";
-import { interestApiSlice } from "../../features/interestApiSlice";
+import {
+  interestApiSlice,
+  useDeleteInterestMutation,
+} from "../../features/interestApiSlice";
+import { useNavigate } from "react-router-dom";
 
 const Interest = ({ id }) => {
+  const navigate = useNavigate();
+  const [deleteInterest] = useDeleteInterestMutation();
   const { interest } = interestApiSlice.useGetInterestQuery(undefined, {
     selectFromResult: ({ data }) => ({
       interest: data?.entities[id],
     }),
   });
-  console.log(interest);
+  const handleUpdateButton = () => {
+    navigate(`/interest-update/${id}`);
+  };
+  const handleDeleteButton = async () => {
+    await deleteInterest({ id });
+  };
   return (
     <div className="glass w-[320px] h-[300px] flex align-center justify-center flex-col">
       <div className="w-[100px] h-[100px] ">
@@ -19,6 +30,20 @@ const Interest = ({ id }) => {
       </div>
       <div>
         <p className="text-center">{interest?.description}</p>
+      </div>
+      <div className="flex gap-5 mt-2">
+        <button
+          className="bg-green-500 p-2 rounded-full  "
+          onClick={handleUpdateButton}
+        >
+          Update
+        </button>
+        <button
+          className="bg-green-500 p-2 rounded-full"
+          onClick={handleDeleteButton}
+        >
+          Delete
+        </button>
       </div>
     </div>
   );

@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetInterestQuery,
+  useUpdateInterestMutation,
+} from "../../features/interestApiSlice";
 import uploadImageToCloudinary from "../../Utils/cloundinaryUpload";
-import { useAddNewInterestMutation } from "../../features/interestApiSlice";
 
-const CreateInterest = () => {
-  const [addNewInterest] = useAddNewInterestMutation();
-  const [isUploading, setIsUploading] = useState(false);
+const UpdateInterest = () => {
+  const navigate = useNavigate();
+  const [updateInterest] = useUpdateInterestMutation();
+  const { interestId } = useParams();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     img: "",
   });
-  console.log(formData);
+  const [isUploading, setIsUploading] = useState(false);
+  const { interest } = useGetInterestQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      interest: data?.entities[interestId],
+    }),
+  });
+  useEffect(() => {
+    if (interest) {
+      setFormData({ ...interest });
+    }
+  }, [interest]);
   const handleChange = async (e) => {
     const { name, type } = e.target;
     if (type === "file") {
@@ -29,13 +44,14 @@ const CreateInterest = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addNewInterest({ ...formData });
+    await updateInterest({ ...formData });
+    navigate("/");
   };
   return (
     <div>
+      <h2 className="text-center text-[34px]">Update Interest</h2>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
         <fieldset disabled={isUploading}>
           <div className="mb-4">
@@ -102,4 +118,4 @@ const CreateInterest = () => {
   );
 };
 
-export default CreateInterest;
+export default UpdateInterest;
