@@ -1,0 +1,41 @@
+.custom-carousel {
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    margin: 0 auto;
+  }
+  
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .carousel-content {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  .slide {
+    flex: 0 0 100%;
+    transition: opacity 0.5s ease;
+  }
+  
+  .slide.active {
+    opacity: 1;
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  

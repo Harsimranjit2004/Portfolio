@@ -130,6 +130,7 @@ const Project = ({ id, filter }) => {
               justifyContent: "center",
             }}
             className="border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex gap-4"
+            onClick={() => navigate(`/project/${id}`)}
           >
             <div className="ml-1"> Know more</div>
             <FontAwesomeIcon icon={faArrowRight} />
