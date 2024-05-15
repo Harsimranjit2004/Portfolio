@@ -5,18 +5,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import uploadImageToCloudinary from "../../Utils/cloundinaryUpload";
+import {
+  useAddNewBlogsMutation,
+  useGetBlogsQuery,
+} from "../../features/blogsApiSlice";
 
 const CreateBlog = () => {
+  const [addBlog] = useAddNewBlogsMutation();
   const [isUploading, setIsUploading] = useState(false);
   const quill = useRef();
   const navigate = useNavigate();
   const [content, setContent] = useState();
-  console.log(content);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    content: "",
     imgUrl: "",
+    tags: "",
+    author: "",
   });
   const handleChange = async (e) => {
     const { name, type, value } = e.target;
@@ -32,6 +37,15 @@ const CreateBlog = () => {
         setIsUploading(false);
       }
     } else {
+      //   const value = e.target.value;
+      const string = e.target.value;
+      let value = "";
+      if (name == "tags") {
+        const tagsArray = string.split(",").map((tag) => tag.trim());
+        value = tagsArray;
+      } else {
+        value = e.target.value;
+      }
       setFormData({ ...formData, [name]: value });
     }
   };
@@ -45,13 +59,9 @@ const CreateBlog = () => {
       const file = input.files[0];
 
       try {
-        // Upload image to Cloudinary
         const imageUrl = await uploadImageToCloudinary(file);
 
-        // Get the Quill editor instance
         const quillEditor = quill.current.getEditor();
-
-        // Insert the image at the current cursor position
         quillEditor.clipboard.dangerouslyPasteHTML(
           quillEditor.getSelection(true).index,
           `<img src="${imageUrl}" alt="Uploaded Image" />`
@@ -78,7 +88,10 @@ const CreateBlog = () => {
           ["clean"],
           ["code-block"],
           ["code"],
+          ["list"],
+          ["bullet"],
         ],
+
         handlers: {
           image: imageHandler,
         },
@@ -108,7 +121,23 @@ const CreateBlog = () => {
     "code",
     "size",
   ];
-  console.log(formData);
+  // console.log(formData);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await addBlog({ ...formData, content: content });
+    // console.log(formData);/
+    alert("Blog created successfully!");
+  };
+  const handleClear = () => {
+    setFormData({
+      title: "",
+      description: "",
+      imgUrl: "",
+      tags: "",
+      author: "",
+    });
+    setContent("");
+  };
   return (
     <div className="align-center justify-center ">
       <div>
@@ -158,12 +187,36 @@ const CreateBlog = () => {
               type="file"
               id="imgUrl"
               name="imgUrl"
-              value={formData.imgUrl}
+              // value={formData.imgUrl}
+              disabled={isUploading}
+              onChange={handleChange}
+              className="border-2 border-gray-300 p-1 h-[2.5rem] w-full m-3"
+            />
+          </div>
+          <div className="w-[97%]">
+            <h3 className="p-2 text-lg font-bold">Blog tags</h3>
+            <input
+              type="text"
+              id="tags"
+              name="tags"
+              value={formData.tags}
+              onChange={handleChange}
+              className="border-2 border-gray-300 p-1 h-[2.5rem] w-full m-3"
+            />
+          </div>
+          <div className="w-[97%]">
+            <h3 className="p-2 text-lg font-bold">Blog Author</h3>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              value={formData.author}
               onChange={handleChange}
               className="border-2 border-gray-300 p-1 h-[2.5rem] w-full m-3"
             />
           </div>
           <div className="w-[97%] mb-2 m-3">
+            <h3 className="p-2 text-lg font-bold">Blog Content</h3>
             <ReactQuill
               ref={(el) => (quill.current = el)}
               theme="snow"
@@ -173,14 +226,40 @@ const CreateBlog = () => {
               modules={modules}
             />
           </div>
+          <div className="w-[97%] mb-2 m-3 flex align-center jusitfy-center gap-5">
+            <button
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              className="border-2 border-gray-300 hover:gap-5 text-zinc-900 font-bold py-2 px-8 rounded  flex gap-4"
+              onClick={handleSubmit}
+            >
+              <div className="ml-1"> Create Blog</div>
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+            <button
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              className="border-2 border-gray-300 hover:gap-5 text-zinc-900 font-bold py-2 px-8 rounded  flex gap-4"
+              onClick={handleClear}
+            >
+              <div className="ml-1"> Clear</div>
+            </button>
+          </div>
         </div>
+
         <div className="w-1/2 border-2 border-gray-300 m-6 ">
           <h2 className="text-center text-3xl font-bolder pb-1">Blog View</h2>
           <hr />
           <div className="w-[97%]">
             <h3 className="p-2 text-lg font-bold">Blog title</h3>
             <div className="p-1 h-[2.5rem] w-full m-3">
-              <h2>{formData?.title}</h2>
+              <h2 className="text-3xl font-bold">{formData?.title}</h2>
             </div>
             <hr />
             <h3 className="p-2 text-lg font-bold">Blog Description</h3>
@@ -189,7 +268,10 @@ const CreateBlog = () => {
             </div>
             <h3 className="p-2 text-lg font-bold">Blog Content</h3>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: content }} />
+          <div
+            className="w-[97%] mb-2 m-3"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </div>
       </div>
     </div>

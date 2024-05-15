@@ -94,3 +94,19 @@ pre{
   color: white;
   padding: 2px;
 }
+/* Style for unordered list */
+ul {
+  list-style-type: disc; /* Change bullet style */
+  padding-left: 20px; /* Adjust left padding */
+}
+
+/* Style for ordered list */
+ol {
+  list-style-type: decimal; /* Change numbering style */
+  padding-left: 20px; /* Adjust left padding */
+}
+
+/* Style for list items */
+li {
+  margin-bottom: 5px; /* Adjust margin between list items */
+}
