@@ -84,3 +84,13 @@ code {
   justify-content: center;
   border-bottom: 1px solid gray;
 }
+code{
+  background: #000;
+  color:  white;
+  padding: 2;
+}
+pre{
+  background-color: #000;
+  color: white;
+  padding: 2px;
+}
