@@ -9,9 +9,12 @@ import UpdateProject from "./components/Homepage/UpdateProject";
 import Admin from "./Pages/Admin";
 import UpdateInterest from "./components/Homepage/UpdateInterest";
 import About from "./Pages/About";
+import BlogDetails from "./components/Blogpage/BlogDetail";
 import Contact from "./Pages/Contact";
 import Resources from "./components/Blogpage/Resources";
 import CreateBlog from "./components/Adminpage/CreateBlog";
+import UpdateNotes from "./components/Blogpage/UpdateNotes";
+import UpdateBlog from "./components/Blogpage/UpdateBlog";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   return (
@@ -29,6 +32,9 @@ const App = () => {
         <Route path="/Blogs" element={<Resources />} />
         <Route path="Contact" element={<Contact />} />
         <Route path="/create-blog" element={<CreateBlog />} />
+        <Route path="/note-update/:noteId" element={<UpdateNotes />} />
+        <Route path="/blog/:blogId" element={<BlogDetails />} />
+        <Route path="update-blog/:blogId" element={<UpdateBlog />} />
       </Route>
     </Routes>
   );

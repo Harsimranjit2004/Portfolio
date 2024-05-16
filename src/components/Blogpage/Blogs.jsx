@@ -1,22 +1,19 @@
 import React from "react";
-import { useGetNotesQuery } from "../../features/notesApiSlice";
-// import Cards from "../../Utils/Cards";s
+import Blog from "./Blog";
+import { useGetBlogsQuery } from "../../features/blogsApiSlice";
+
 const Blogs = () => {
-  const { data } = useGetNotesQuery(undefined, {
+  const { data } = useGetBlogsQuery(undefined, {
     pollingInterval: 60000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
   });
-  // console.log(data);
-  //   const pdfURL = "https://www.clickdimensions.com/links/TestPDFfile.pdf";
+
   return (
-    <div>
-      {/* <Cards /> */}
-      {/* <iframe
-        src="https://www.clickdimensions.com/links/TestPDFfile.pdf"
-        width={1000}
-        height={500}
-      /> */}
+    <div className="work__portfolio gap-5 p-4 pb-6">
+      {data?.ids?.map((item, index) => (
+        <Blog id={item} key={index} />
+      ))}
     </div>
   );
 };

@@ -3,8 +3,10 @@ import {
   useDeleteNotesMutation,
   useGetNotesQuery,
 } from "../../features/notesApiSlice";
+import { useNavigate } from "react-router-dom";
 
 const Note = ({ id }) => {
+  const navigate = useNavigate();
   const { note } = useGetNotesQuery(undefined, {
     selectFromResult: ({ data }) => ({
       note: data?.entities[id],
@@ -12,7 +14,7 @@ const Note = ({ id }) => {
   });
   const [deleteNote] = useDeleteNotesMutation();
   const handleUpdateButton = () => {
-    navigate(`/project-update/${id}`);
+    navigate(`/note-update/${id}`);
   };
   const handleDeleteButton = () => {
     deleteNote({ id });

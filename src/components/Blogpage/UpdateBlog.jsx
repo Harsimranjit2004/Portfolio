@@ -1,17 +1,23 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
-import ReactQuill from "react-quill";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import {
+  useGetBlogsQuery,
+  useUpdateBlogsMutation,
+} from "../../features/blogsApiSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import uploadImageToCloudinary from "../../Utils/cloundinaryUpload";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
-import "react-quill/dist/quill.snow.css";
-import uploadImageToCloudinary from "../../Utils/cloundinaryUpload";
-import {
-  useAddNewBlogsMutation,
-  useGetBlogsQuery,
-} from "../../features/blogsApiSlice";
+import ReactQuill from "react-quill";
 
-const CreateBlog = () => {
-  const [addBlog] = useAddNewBlogsMutation();
+const UpdateBlog = () => {
+  const { blogId } = useParams();
+  const [updateBlog] = useUpdateBlogsMutation();
   const [isUploading, setIsUploading] = useState(false);
   const quill = useRef();
   const navigate = useNavigate();
@@ -24,8 +30,18 @@ const CreateBlog = () => {
     author: "",
     category: "",
     readingTime: "",
-    tableContent: "",
   });
+  const { blog } = useGetBlogsQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      blog: data?.entities[blogId],
+    }),
+  });
+  useEffect(() => {
+    if (blog) {
+      setFormData({ ...blog });
+      setContent(blog?.content);
+    }
+  }, [blog]);
   const handleChange = async (e) => {
     const { name, type, value } = e.target;
     if (type == "file") {
@@ -126,7 +142,7 @@ const CreateBlog = () => {
   // console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addBlog({ ...formData, content: content });
+    await updateBlog({ ...formData, content: content });
     // console.log(formData);/
     alert("Blog created successfully!");
   };
@@ -271,7 +287,7 @@ const CreateBlog = () => {
               className="border-2 border-gray-300 hover:gap-5 text-zinc-900 font-bold py-2 px-8 rounded  flex gap-4"
               onClick={handleSubmit}
             >
-              <div className="ml-1"> Create Blog</div>
+              <div className="ml-1"> Update Blog</div>
               <FontAwesomeIcon icon={faArrowRight} />
             </button>
             <button
@@ -313,4 +329,4 @@ const CreateBlog = () => {
   );
 };
 
-export default CreateBlog;
+export default UpdateBlog;
