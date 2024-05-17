@@ -12,8 +12,8 @@ const Educations = () => {
 
   return (
     <div className="p-8 bg-zinc-900 text-white">
-      <h2 className="text-3xl font-bold text-center mb-8">
-        Education & Experience
+      <h2 className="p-4 pt-6 text-center text-5xl">
+        Education & <span className="text-green-500">Experience</span>
       </h2>
       {!isLoading && (
         <VerticalTimeline>

@@ -1,5 +1,11 @@
 .clip-path{
-    clip-path: polygon(34% 23%, 66% 9%, 81% 36%, 92% 71%, 63% 85%, 32% 83%, 20% 63%, 9% 45%);
+     /* clip-path: polygon(34% 23%, 66% 9%, 81% 36%, 92% 71%, 63% 85%, 32% 83%, 20% 63%, 9% 45%); */
+     /* clip-path: polygon(1% 0, 99% 1%, 100% 100%, 0% 100%); */
+     clip-path: circle(40%);  
+     /* clip-path: polygon(14% 1%, 90% 0, 87% 59%, 16% 60%); */
+     /* clip-path: polygon(14% 1%, 90% 0, 89% 84%, 15% 84%); */
+     /* clip-path: url(#svgPath); */
+            /* -webkit-clip-path: url(#svgPath); For Safari */
 }
 .about__skills__main {
     background-color: white;
