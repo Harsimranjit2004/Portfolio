@@ -19,7 +19,6 @@ import UpdateSkill from "./components/Aboutpage/UpdateSkill";
 import UpdateEducation from "./components/Aboutpage/UpdateEducation";
 import Login from "./Pages/Login";
 import { useSelector } from "react-redux";
-import { useGetUserInfoQuery } from "./features/userInfoApiSlice";
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
