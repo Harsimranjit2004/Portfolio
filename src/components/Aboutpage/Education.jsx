@@ -10,8 +10,10 @@ import {
   useGetEducationQuery,
 } from "../../features/educationApiSlice";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Education = ({ id }) => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
   const [deleteEducation] = useDeleteEducationMutation();
   const { education } = useGetEducationQuery(undefined, {
@@ -55,20 +57,22 @@ const Education = ({ id }) => {
           <li key={index}>{item}</li>
         ))}
       </ul>
-      <div className="flex gap-5 mt-2">
-        <button
-          className="bg-green-500 p-2 rounded-full"
-          onClick={handleDeleteButton}
-        >
-          Delete
-        </button>
-        <button
-          className="bg-green-500 p-2 rounded-full"
-          onClick={handleUpdateButton}
-        >
-          Update
-        </button>
-      </div>
+      {isAuthenticated && (
+        <div className="flex gap-5 mt-2">
+          <button
+            className="bg-green-500 p-2 rounded-full"
+            onClick={handleDeleteButton}
+          >
+            Delete
+          </button>
+          <button
+            className="bg-green-500 p-2 rounded-full"
+            onClick={handleUpdateButton}
+          >
+            Update
+          </button>
+        </div>
+      )}
     </VerticalTimelineElement>
 
     //   {/* Add more elements as needed */}

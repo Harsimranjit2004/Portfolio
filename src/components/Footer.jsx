@@ -1,10 +1,10 @@
 import logo from "../assets/main_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faInstagram,
   faGithub,
-  faWhatsapp,
   faLinkedin,
+  faKaggle,
+  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -50,24 +50,35 @@ const Footer = () => {
             />
           </div>
 
-          <div className="socailMedaiContainer flex align-center justify-center gap-5 w">
-            <div className="socialMedia">
-              <FontAwesomeIcon
-                className=""
-                color="white"
-                size="2xl"
-                icon={faLinkedin}
-              />
-            </div>
-            <div className="socialMedia">
-              <FontAwesomeIcon size="2xl" color="white" icon={faGithub} />
-            </div>
-            <div className="socialMedia">
-              <FontAwesomeIcon size="2xl" color="white" icon={faInstagram} />
-            </div>
-            <div className="socialMedia">
-              <FontAwesomeIcon size="2xl" color="white" icon={faWhatsapp} />
-            </div>
+          <div className="socailMedaiContainer flex align-center justify-center gap-5 ">
+            <a
+              href="https://www.linkedin.com/in/harsimranjit-singh-775781278/"
+              target="_blank"
+            >
+              <div className="socialMedia pointer">
+                <FontAwesomeIcon
+                  className=""
+                  color="white"
+                  size="2xl"
+                  icon={faLinkedin}
+                />
+              </div>
+            </a>
+            <a href="https://github.com/Harsimranjit2004" target="_blank">
+              <div className="socialMedia pointer">
+                <FontAwesomeIcon size="2xl" color="white" icon={faGithub} />
+              </div>
+            </a>
+            <a href="https://www.kaggle.com/hsingh956" target="_blank">
+              <div className="socialMedia pointer">
+                <FontAwesomeIcon size="2xl" color="white" icon={faKaggle} />
+              </div>
+            </a>
+            <a href="https://x.com/Harsimranj89788" target="_blank">
+              <div className="socialMedia pointer">
+                <FontAwesomeIcon size="2xl" color="white" icon={faTwitter} />
+              </div>
+            </a>
           </div>
         </div>
         <div className="hidden sm:flex flex-col text-white align-center justify-center ">

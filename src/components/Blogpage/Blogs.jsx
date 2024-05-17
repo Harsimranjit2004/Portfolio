@@ -10,7 +10,7 @@ const Blogs = () => {
   });
 
   return (
-    <div className="work__portfolio gap-5 p-4 pb-6">
+    <div className="work__portfolio gap-5 p-4 pb-6 ">
       {data?.ids?.map((item, index) => (
         <Blog id={item} key={index} />
       ))}

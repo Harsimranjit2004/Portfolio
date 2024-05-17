@@ -6,8 +6,10 @@ import {
 } from "../../features/blogsApiSlice";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 
 const Blog = ({ id }) => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
   const { blog } = useGetBlogsQuery(undefined, {
     selectFromResult: ({ data }) => ({
@@ -22,7 +24,7 @@ const Blog = ({ id }) => {
     deleteBlog({ id });
   };
   return (
-    <div className="w-[320px] z-[900]">
+    <div className="w-[320px] z-[900] ">
       <div className="imageContainer w-[100%] h-[200px]">
         <div className="Image m-auto w-[97%] h-[190px] hover:w-[100%] hover:h-[200px] duration-700">
           <img
@@ -52,20 +54,22 @@ const Blog = ({ id }) => {
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
       </div>
-      <div className="flex gap-5 mt-2">
-        <button
-          className="bg-green-500 p-2 rounded-full  "
-          onClick={handleUpdateButton}
-        >
-          Update
-        </button>
-        <button
-          className="bg-green-500 p-2 rounded-full"
-          onClick={handleDeleteButton}
-        >
-          Delete
-        </button>
-      </div>
+      {isAuthenticated && (
+        <div className="flex gap-5 mt-2">
+          <button
+            className="bg-green-500 p-2 rounded-full  "
+            onClick={handleUpdateButton}
+          >
+            Update
+          </button>
+          <button
+            className="bg-green-500 p-2 rounded-full"
+            onClick={handleDeleteButton}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };

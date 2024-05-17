@@ -10,7 +10,9 @@ import {
 } from "../../features/projectsApiSlice";
 import { useNavigate } from "react-router-dom";
 import "./Hero.css";
+import { useSelector } from "react-redux";
 const Project = ({ id, filter }) => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
   const { project } = projectApiSlice.useGetProjectQuery(undefined, {
     selectFromResult: ({ data }) => ({
@@ -137,20 +139,22 @@ const Project = ({ id, filter }) => {
           </button>
         </div>
       </div>
-      <div className="flex gap-5 mt-2">
-        <button
-          className="bg-green-500 p-2 rounded-full  "
-          onClick={handleUpdateButton}
-        >
-          Update
-        </button>
-        <button
-          className="bg-green-500 p-2 rounded-full"
-          onClick={handleDeleteButton}
-        >
-          Delete
-        </button>
-      </div>
+      {isAuthenticated && (
+        <div className="flex gap-5 mt-2">
+          <button
+            className="bg-green-500 p-2 rounded-full  "
+            onClick={handleUpdateButton}
+          >
+            Update
+          </button>
+          <button
+            className="bg-green-500 p-2 rounded-full"
+            onClick={handleDeleteButton}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };

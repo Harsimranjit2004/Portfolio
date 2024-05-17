@@ -27,7 +27,6 @@ const ProjectDetail = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  console.log(project);
   const content = (
     <div className="bg-zinc-900 text-white min-h-screen">
       <Navbar isHomePage={"no"} />

@@ -11,7 +11,7 @@ const Navbar = ({ isHomePage }) => {
   };
   const navigate = useNavigate();
   const handleAdmin = () => {
-    navigate("/admin");
+    navigate("/login");
   };
   return (
     <div className="overflow-hidden">

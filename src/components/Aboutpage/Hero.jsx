@@ -7,7 +7,7 @@ import myImg from "../../assets/myImg.png";
 import { motion } from "framer-motion";
 const Hero = () => {
   const content = (
-    <div className=" h-sc bg-zinc-900 h-screen text-white pt-[8rem] flex align-center justify-center py-20 border-b border-gray-700 ">
+    <div className=" h-sc bg-zinc-900 text-white pt-[4rem] flex align-center justify-center  border-b border-gray-700 ">
       {/* <svg height="0" width="0">
         <defs>
           <clipPath id="svgPath">
@@ -22,7 +22,7 @@ const Hero = () => {
         </defs>
       </svg> */}
 
-      <div className=" max-w-[2000px] w-full flex md:flex-row flex-col justify-evenly gap-10 items-center">
+      <div className=" max-w-[2000px] w-full my-16 flex md:flex-row flex-col justify-evenly gap-10 items-center">
         <div className="flex">
           <div className="w-[500px] h-[500px]">
             <img

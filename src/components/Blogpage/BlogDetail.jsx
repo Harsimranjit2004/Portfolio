@@ -7,7 +7,6 @@ import formatDate from "../../Utils/convertDate";
 const BlogDetail = () => {
   const [date, setDate] = useState();
   const { blogId } = useParams();
-  console.log(blogId);
   const { blog } = useGetBlogsQuery(undefined, {
     selectFromResult: ({ data }) => ({
       blog: data?.entities[blogId],
@@ -16,7 +15,7 @@ const BlogDetail = () => {
   useEffect(() => {
     setDate(formatDate(blog?.createdAt));
   }, [blog]);
-  console.log(blog?.createdAt.toString());
+
   return (
     <div className="bg-zinc-900">
       <Navbar isHomePage={"no"} />

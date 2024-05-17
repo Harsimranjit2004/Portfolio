@@ -2,7 +2,7 @@ import React from "react";
 import Home from "./Pages/Home";
 import LocomotiveScroll from "locomotive-scroll";
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import ProjectDetail from "./components/Homepage/ProjectDetail";
 import UpdateProject from "./components/Homepage/UpdateProject";
@@ -17,7 +17,17 @@ import UpdateNotes from "./components/Blogpage/UpdateNotes";
 import UpdateBlog from "./components/Blogpage/UpdateBlog";
 import UpdateSkill from "./components/Aboutpage/UpdateSkill";
 import UpdateEducation from "./components/Aboutpage/UpdateEducation";
+import Login from "./Pages/Login";
+import { useSelector } from "react-redux";
 const App = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const PrivateRoute = ({ element, redirectTo }) => {
+    return isAuthenticated ? (
+      element
+    ) : (
+      <Navigate to={redirectTo} replace state={{}} />
+    );
+  };
   const locomotiveScroll = new LocomotiveScroll();
   return (
     <Routes>
@@ -29,7 +39,10 @@ const App = () => {
           path="interest-update/:interestId"
           element={<UpdateInterest />}
         />
-        <Route path="/admin" element={<Admin />} />
+        <Route
+          path="/admin"
+          element={<PrivateRoute element={<Admin />} redirectTo="/login" />}
+        />
         <Route path="/About" element={<About />} />
         <Route path="/Blogs" element={<Resources />} />
         <Route path="Contact" element={<Contact />} />
@@ -42,6 +55,7 @@ const App = () => {
           path="/update-education/:educationId"
           element={<UpdateEducation />}
         />
+        <Route path="/login" element={<Login />} />
       </Route>
     </Routes>
   );

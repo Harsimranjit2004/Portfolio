@@ -5,8 +5,10 @@ import {
   useDeleteInterestMutation,
 } from "../../features/interestApiSlice";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Interest = ({ id }) => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
   const [deleteInterest] = useDeleteInterestMutation();
   const { interest } = interestApiSlice.useGetInterestQuery(undefined, {
@@ -42,20 +44,22 @@ const Interest = ({ id }) => {
       <div>
         <p className="text-center">{interest?.description}</p>
       </div>
-      <div className="flex gap-5 mt-2">
-        <button
-          className="bg-green-500 p-2 rounded-full  "
-          onClick={handleUpdateButton}
-        >
-          Update
-        </button>
-        <button
-          className="bg-green-500 p-2 rounded-full"
-          onClick={handleDeleteButton}
-        >
-          Delete
-        </button>
-      </div>
+      {isAuthenticated && (
+        <div className="flex gap-5 mt-2">
+          <button
+            className="bg-green-500 p-2 rounded-full  "
+            onClick={handleUpdateButton}
+          >
+            Update
+          </button>
+          <button
+            className="bg-green-500 p-2 rounded-full"
+            onClick={handleDeleteButton}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };

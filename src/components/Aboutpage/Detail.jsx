@@ -11,9 +11,9 @@ const Detail = () => {
   return (
     <div className="bg-zinc-900 text-white p-6 border-b border-gray-700">
       <Typography variant="h4" align="center" gutterBottom>
-        <h2 className="p-4 pt-6 text-center text-5xl">
-          Know More <span className="text-green-500">About Me</span>
-        </h2>
+        {/* <h2 className="p-4 pt-6 text-center text-5xl"> */}
+        Know More <span className="text-green-500">About Me</span>
+        {/* </h2> */}
       </Typography>
 
       <Grid container spacing={4} justifyContent="center" className="pt-5">

@@ -7,7 +7,9 @@ import {
   useGetSkillsQuery,
 } from "../../features/skillsApiSlice";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Skill = ({ id }) => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
   const [deleteSkill] = useDeleteSkillsMutation();
   const { skill } = useGetSkillsQuery(undefined, {
@@ -57,20 +59,22 @@ const Skill = ({ id }) => {
           </Typography>
         </Box>
       </Box>
-      <div className="flex gap-5 mt-2">
-        <button
-          className="bg-green-500 p-2 rounded-full"
-          onClick={handleDeleteButton}
-        >
-          Delete
-        </button>
-        <button
-          className="bg-green-500 p-2 rounded-full"
-          onClick={handleUpdateButton}
-        >
-          Update
-        </button>
-      </div>
+      {isAuthenticated && (
+        <div className="flex gap-5 mt-2">
+          <button
+            className="bg-green-500 p-2 rounded-full"
+            onClick={handleDeleteButton}
+          >
+            Delete
+          </button>
+          <button
+            className="bg-green-500 p-2 rounded-full"
+            onClick={handleUpdateButton}
+          >
+            Update
+          </button>
+        </div>
+      )}
     </div>
   );
 };

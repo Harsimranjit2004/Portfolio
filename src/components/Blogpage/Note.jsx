@@ -4,8 +4,10 @@ import {
   useGetNotesQuery,
 } from "../../features/notesApiSlice";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Note = ({ id }) => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
   const { note } = useGetNotesQuery(undefined, {
     selectFromResult: ({ data }) => ({
@@ -51,20 +53,22 @@ const Note = ({ id }) => {
           </div> */}{" "}
         </div>
       </div>
-      <div className="flex gap-5 mt-2">
-        <button
-          className="bg-green-500 p-2 rounded-full  "
-          onClick={handleUpdateButton}
-        >
-          Update
-        </button>
-        <button
-          className="bg-green-500 p-2 rounded-full"
-          onClick={handleDeleteButton}
-        >
-          Delete
-        </button>
-      </div>
+      {isAuthenticated && (
+        <div className="flex gap-5 mt-2">
+          <button
+            className="bg-green-500 p-2 rounded-full  "
+            onClick={handleUpdateButton}
+          >
+            Update
+          </button>
+          <button
+            className="bg-green-500 p-2 rounded-full"
+            onClick={handleDeleteButton}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };

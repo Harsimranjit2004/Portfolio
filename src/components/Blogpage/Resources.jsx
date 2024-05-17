@@ -10,7 +10,7 @@ const Resources = () => {
     setSelectedTab(newValue);
   };
   return (
-    <div className="bg-zinc-900 h-screen">
+    <div className="bg-zinc-900 min-h-screen">
       <Navbar isHomePage={"no"} />
       <div className="mt-[4rem]">
         <h2 className="text-green-500 text-4xl text-center pt-2 pb-2">
