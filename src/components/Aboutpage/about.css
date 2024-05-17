@@ -1,0 +1,27 @@
+.clip-path{
+    clip-path: polygon(34% 23%, 66% 9%, 81% 36%, 92% 71%, 63% 85%, 32% 83%, 20% 63%, 9% 45%);
+}
+.about__skills__main {
+    background-color: white;
+    padding: 2rem;
+ }
+ .about__skills__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #eb6b40;
+    font-size: 2rem;
+ }
+ 
+ .about_skills__content__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6rem;
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    /* background-color: red; */
+ }

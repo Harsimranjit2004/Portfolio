@@ -62,7 +62,7 @@ const About = () => {
                 }}
                 className=" border-2 border-gray-300 hover:gap-5 text-white font-bold py-2 px-8 rounded  flex align-center justify-center gap-4"
               >
-                <div className="ml-1"> Let's Connect</div>
+                <div className="ml-1">Know More</div>
                 <FontAwesomeIcon icon={faArrowRight} />
               </button>
             </div>

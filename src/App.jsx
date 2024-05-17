@@ -15,6 +15,8 @@ import Resources from "./components/Blogpage/Resources";
 import CreateBlog from "./components/Adminpage/CreateBlog";
 import UpdateNotes from "./components/Blogpage/UpdateNotes";
 import UpdateBlog from "./components/Blogpage/UpdateBlog";
+import UpdateSkill from "./components/Aboutpage/UpdateSkill";
+import UpdateEducation from "./components/Aboutpage/UpdateEducation";
 const App = () => {
   const locomotiveScroll = new LocomotiveScroll();
   return (
@@ -35,6 +37,11 @@ const App = () => {
         <Route path="/note-update/:noteId" element={<UpdateNotes />} />
         <Route path="/blog/:blogId" element={<BlogDetails />} />
         <Route path="update-blog/:blogId" element={<UpdateBlog />} />
+        <Route path="update-skill/:skillId" element={<UpdateSkill />} />
+        <Route
+          path="/update-education/:educationId"
+          element={<UpdateEducation />}
+        />
       </Route>
     </Routes>
   );

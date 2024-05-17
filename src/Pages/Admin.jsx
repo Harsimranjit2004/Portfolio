@@ -5,7 +5,8 @@ import CreateNotes from "../components/Adminpage/CreateNotes";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
+import CreateSkill from "../components/Adminpage/CreateSkill";
+import CreateEducation from "../components/Adminpage/CreateEducation";
 const Admin = () => {
   const navigate = useNavigate();
   return (
@@ -47,6 +48,14 @@ const Admin = () => {
       <div className="border-b border-gray-700 pb-[60px]">
         <h2 className="text-center text-[30px]">Create new Notes</h2>
         <CreateNotes />
+      </div>
+      <div className="border-b border-gray-700 pb-[60px]">
+        <h2 className="text-center text-[30px]">Create new Skill</h2>
+        <CreateSkill />
+      </div>
+      <div className="border-b border-gray-700 pb-[60px]">
+        <h2 className="text-center text-[30px]">Create new Education</h2>
+        <CreateEducation />
       </div>
     </div>
   );
