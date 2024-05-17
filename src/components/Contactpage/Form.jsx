@@ -23,13 +23,16 @@ const Form = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3500/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://harsimranjit-singh.onrender.com/send-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         console.log("Email sent successfully!");
