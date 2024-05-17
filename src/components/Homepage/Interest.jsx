@@ -29,7 +29,7 @@ const Interest = ({ id }) => {
         alignItems: "center",
         justifyContent: "center",
       }}
-      className="glass w-[320px] h-[300px] flex align-center justify-center flex-col"
+      className="glass w-[320px] min-h-[300px] flex align-center justify-center flex-col"
     >
       <div className="w-[100px] h-[100px] ">
         <img
