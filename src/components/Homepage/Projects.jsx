@@ -3,7 +3,10 @@ import { useState } from "react";
 import { useGetProjectQuery } from "../../features/projectsApiSlice";
 import { motion } from "framer-motion";
 import Project from "./Project";
+import { useSelector } from "react-redux";
+import { selectAllUserInfos } from "../../features/userInfoApiSlice";
 const Projects = () => {
+  const allUserInfo = useSelector(selectAllUserInfos);
   const [activeFilter, setActiveFilter] = useState("All");
   const [animateCart, setAnimateCart] = useState({ y: 0, opacity: 1 });
   const handleFilter = (item) => {
@@ -32,14 +35,7 @@ const Projects = () => {
         </h1>
       </div>
       <div className="project__filter">
-        {[
-          "MERN",
-          "C++",
-          "Machine Learning",
-          "Web Development",
-          "Data Science",
-          "All",
-        ].map((item, index) => (
+        {allUserInfo?.[0].tags.map((item, index) => (
           <div
             key={`${item}-${index}`}
             onClick={() => handleFilter(item)}

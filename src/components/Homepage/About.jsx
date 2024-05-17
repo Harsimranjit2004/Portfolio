@@ -3,7 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import myImage from "../../assets/myImg.png";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectAllUserInfos } from "../../features/userInfoApiSlice";
 const About = () => {
+  const allUserInfo = useSelector(selectAllUserInfos);
   const navigate = useNavigate();
   return (
     <div
@@ -27,11 +30,7 @@ const About = () => {
               I'm <span className="text-green-500">Harsimranjit Singh</span>
             </h2>
             <p className="text-base mt-5 sm:text-xl text-lg">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic ad
-              sint voluptatum adipisci fuga sunt minus voluptate reprehenderit?
-              Et voluptatum quae dicta corrupti optio tempora officiis officia,
-              exercitationem, debitis, asperiores nisi. Distinctio magnam
-              ducimus magni iusto quod dolores, consequuntur ullam!
+              {allUserInfo?.[0].HomeAbout}
             </p>
             <div
               style={{
@@ -70,7 +69,7 @@ const About = () => {
         </div>
         <img
           className="mx-auto rounded-3xl py-8 py-0"
-          src={myImage}
+          src={allUserInfo?.[0].image1}
           width={300}
           height={300}
         />

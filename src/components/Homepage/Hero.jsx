@@ -9,8 +9,12 @@ import {
 import Navbar from "../Navbar";
 import { faDownload, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectAllUserInfos } from "../../features/userInfoApiSlice";
 // import DisplayHeader from "../DisplayHeader";
 const Hero = () => {
+  const allUserInfo = useSelector(selectAllUserInfos);
+
   const navigate = useNavigate();
   useEffect(() => {
     applyRevealAnimation(".reveal");
@@ -85,17 +89,19 @@ const Hero = () => {
             <div className="ml-1"> Let's Connect</div>
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
-          <button
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            className="border-2 border-green-500 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded flex align-center justify-center gap-4 "
-          >
-            <FontAwesomeIcon icon={faDownload} />
-            <div className="ml-1">Resume</div>
-          </button>
+          <a href={allUserInfo?.[0].resume} download>
+            <button
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              className="border-2 border-green-500 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded flex align-center justify-center gap-4 "
+            >
+              <FontAwesomeIcon icon={faDownload} />
+              <div className="ml-1">Resume</div>
+            </button>
+          </a>
         </div>
       </div>
     </div>

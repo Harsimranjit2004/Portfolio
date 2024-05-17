@@ -5,7 +5,11 @@ import demo from "../../assets/demo.png";
 import main from "../../assets/main.png";
 import myImg from "../../assets/myImg.png";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { selectAllUserInfos } from "../../features/userInfoApiSlice";
 const Hero = () => {
+  const allUserInfo = useSelector(selectAllUserInfos);
+  console.log(allUserInfo);
   const content = (
     <div className=" h-sc bg-zinc-900 text-white pt-[4rem] flex align-center justify-center  border-b border-gray-700 ">
       {/* <svg height="0" width="0">
@@ -26,7 +30,7 @@ const Hero = () => {
         <div className="flex">
           <div className="w-[500px] h-[500px]">
             <img
-              src={myImg}
+              src={allUserInfo?.[0].image2}
               width={550}
               className="w-full h-full object-cover object-top clip-path"
             />
@@ -63,11 +67,7 @@ const Hero = () => {
           </h3>
           <p className=" md:text-lg max-w-[700px] pt-8">
             {" "}
-            {/* Adjusted text size */}I'm a dedicated developer specializing in
-            artificial intelligence, machine learning, deep learning, and web
-            development. With a focus on crafting cutting-edge solutions, I aim
-            to leverage technology to its fullest potential, ensuring remarkable
-            outcomes and seamless user experiences
+            {allUserInfo?.[0].AboutPage}
           </p>
         </div>
       </div>

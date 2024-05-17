@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Contact.css";
 import { faMailForward, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+import { selectAllUserInfos } from "../../features/userInfoApiSlice";
 
 const Form = () => {
+  const allUserInfo = useSelector(selectAllUserInfos);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -59,13 +62,13 @@ const Form = () => {
             icon={faMailForward}
           />
           <a href={`mailto:${"hsdosanjh1234@gmail.com"}`} className="p-text">
-            {"hsdosanjh1234@gmail.com"}{" "}
+            {allUserInfo?.[0].email}
           </a>
         </div>
         <div className="contact__card">
           <FontAwesomeIcon className="contact__card__icon" icon={faPhone} />
           <a href={`tel:${"9057815750"}`} className="p-text">
-            9057815750
+            {allUserInfo?.[0].phone}
           </a>
         </div>
       </div>
