@@ -27,6 +27,7 @@ const CreateEducation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addEducation({ ...formData });
+    alert("new Education added");
   };
   return (
     <div>

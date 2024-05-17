@@ -1,61 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import {
+  selectAllUserInfos,
+  useUpdateUserInfoMutation,
+} from "../../features/userInfoApiSlice";
 import uploadImageToCloudinary from "../../Utils/cloundinaryUpload";
-import { useAddNewProjectMutation } from "../../features/projectsApiSlice";
-uploadImageToCloudinary;
-const CreateProject = () => {
-  const [addNewProject] = useAddNewProjectMutation();
+
+const UpdateUserInfo = () => {
+  const allUserInfo = useSelector(selectAllUserInfos);
+  const [updateUserInfo] = useUpdateUserInfoMutation();
   const [isUploading, setIsUploading] = useState(false);
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    projectLink: "",
-    codeLink: "",
-    imageUrl: "",
+    email: "",
+    phone: "",
+    linkedin: "",
+    twitter: "",
+    kaggle: "",
+    github: "",
+    projects: "",
+    experience: "",
     tags: "",
-    technologiesUsed: "",
-    status: "",
-    highlights: [],
-    screenshots: [],
-    video: [],
-    details: "",
-    creationDate: "",
+    HomeAbout: "",
+    AboutPage: "",
+    image1: "",
+    image2: "",
+    resume: "",
   });
-
+  useEffect(() => {
+    setFormData({ ...allUserInfo?.[0] });
+  }, [allUserInfo]);
+  console.log(formData);
   const handleChange = async (e) => {
     const { name, type } = e.target;
     if (type == "file") {
-      if (e.target.files.length == 1) {
-        try {
-          setIsUploading(true);
-          const file = e.target.files[0];
-          const url = await uploadImageToCloudinary(file);
-          setFormData({ ...formData, [name]: url });
-        } catch (error) {
-          console.error("Error uploading image:", error);
-        } finally {
-          setIsUploading(false);
-        }
-      } else {
-        try {
-          setIsUploading(true);
-          const files = e.target.files;
-          const urls = [];
-          for (let i = 0; i < files.length; i++) {
-            const url = await uploadImageToCloudinary(files[i]);
-            urls[i] = url;
-          }
-          setFormData({ ...formData, [name]: urls });
-        } catch (error) {
-          console.error("error upload image");
-        } finally {
-          setIsUploading(false);
-        }
+      try {
+        setIsUploading(true);
+        const file = e.target.files[0];
+        const url = await uploadImageToCloudinary(file);
+        setFormData({ ...formData, [name]: url });
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      } finally {
+        setIsUploading(false);
       }
     } else {
-      //   const value = e.target.value;
       const string = e.target.value;
       let value = "";
-      if (name == "tags" || name == "technologiesUsed") {
+      if (name == "tags") {
         const tagsArray = string.split(",").map((tag) => tag.trim());
         value = tagsArray;
       } else {
@@ -65,12 +56,10 @@ const CreateProject = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addNewProject({ ...formData });
-    alert("new project added");
-    // Handle form submission, e.g., send data to backend or perform validation
+    await updateUserInfo({ ...formData });
+    alert("userInfo updated");
   };
   return (
     <div>
@@ -78,72 +67,140 @@ const CreateProject = () => {
         <fieldset disabled={isUploading}>
           <div className="mb-4">
             <label
-              htmlFor="title"
+              htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Title
+              Email
             </label>
             <input
               type="text"
-              id="title"
-              name="title"
-              value={formData.title}
+              id="email"
+              name="email"
+              value={formData?.email}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md w-full"
               required
             />
           </div>
-
           <div className="mb-4">
             <label
-              htmlFor="description"
+              htmlFor="phone"
               className="block text-sm font-medium text-gray-700"
             >
-              Description
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="projectLink"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Project Link
+              Phone
             </label>
             <input
               type="text"
-              id="projectLink"
-              name="projectLink"
-              value={formData.projectLink}
+              id="phone"
+              name="phone"
+              value={formData?.phone}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              required
             />
           </div>
-
           <div className="mb-4">
             <label
-              htmlFor="codeLink"
+              htmlFor="linkedin"
               className="block text-sm font-medium text-gray-700"
             >
-              Code Link
+              Linkedin
             </label>
             <input
               type="text"
-              id="codeLink"
-              name="codeLink"
-              value={formData.codeLink}
+              id="linkedin"
+              name="linkedin"
+              value={formData?.linkedin}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              required
             />
           </div>
-
+          <div className="mb-4">
+            <label
+              htmlFor="twitter"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Twitter
+            </label>
+            <input
+              type="text"
+              id="twitter"
+              name="twitter"
+              value={formData?.twitter}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="kaggle"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Kaggle
+            </label>
+            <input
+              type="text"
+              id="kaggle"
+              name="kaggle"
+              value={formData?.kaggle}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="github"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Github
+            </label>
+            <input
+              type="text"
+              id="github"
+              name="github"
+              value={formData?.github}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="projects"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Project
+            </label>
+            <input
+              type="text"
+              id="projects"
+              name="projects"
+              value={formData?.projects}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="experience"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Experience
+            </label>
+            <input
+              type="text"
+              id="experience"
+              name="experience"
+              value={formData?.experience}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              required
+            />
+          </div>
           <div className="mb-4">
             <label
               htmlFor="tags"
@@ -155,146 +212,91 @@ const CreateProject = () => {
               type="text"
               id="tags"
               name="tags"
-              value={formData.tags}
+              value={formData?.tags}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              required
             />
           </div>
-
           <div className="mb-4">
             <label
-              htmlFor="technologiesUsed"
+              htmlFor="HomeAbout"
               className="block text-sm font-medium text-gray-700"
             >
-              Technologies Used
-            </label>
-            <input
-              type="text"
-              id="technologiesUsed"
-              name="technologiesUsed"
-              value={formData.technologiesUsed}
-              onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="status"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Status
-            </label>
-            <input
-              type="text"
-              id="status"
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="highlights"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Highlights
-            </label>
-            <input
-              type="text"
-              id="highlights"
-              name="highlights"
-              value={formData.highlights}
-              onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="details"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Details
+              HomeAbout
             </label>
             <textarea
-              id="details"
-              name="details"
-              value={formData.details}
+              type="text"
+              id="HomeAbout"
+              name="HomeAbout"
+              value={formData?.HomeAbout}
               onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="creationDate"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Creation Date
-            </label>
-            <input
-              type="date"
-              id="creationDate"
-              name="creationDate"
-              value={formData.creationDate}
-              onChange={handleChange}
-              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full h-[10rem]"
+              required
             />
           </div>
           <div className="mb-4">
             <label
-              htmlFor="imageUrl"
+              htmlFor="AboutPage"
               className="block text-sm font-medium text-gray-700"
             >
-              Image URL
+              AboutPage
+            </label>
+            <textarea
+              type="text"
+              id="AboutPage"
+              name="AboutPage"
+              value={formData?.AboutPage}
+              onChange={handleChange}
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full h-[10rem]"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="image1"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Image1
             </label>
             <input
-              // disabled={isUploading}
               type="file"
-              id="imageUrl"
-              name="imageUrl"
-              multiple // Allow multiple file selection
+              id="image1"
+              name="image1"
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             />
           </div>
           <div className="mb-4">
             <label
-              htmlFor="screenshots"
+              htmlFor="image2"
               className="block text-sm font-medium text-gray-700"
             >
-              Screenshots
+              image2
             </label>
             <input
-              // disabled={isUploading}
               type="file"
-              id="screenshots"
-              name="screenshots"
-              multiple // Allow multiple file selection
+              id="image2"
+              name="image2"
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             />
           </div>
           <div className="mb-4">
             <label
-              htmlFor="video"
+              htmlFor="resume"
               className="block text-sm font-medium text-gray-700"
             >
-              Video
+              Resume
             </label>
             <input
-              // disabled={isUploading}
               type="file"
-              id="video"
-              name="video"
+              id="resume"
+              name="resume"
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             />
           </div>
-
           <div className="mb-4">
             <button
               disabled={isUploading}
@@ -309,4 +311,5 @@ const CreateProject = () => {
     </div>
   );
 };
-export default CreateProject;
+
+export default UpdateUserInfo;

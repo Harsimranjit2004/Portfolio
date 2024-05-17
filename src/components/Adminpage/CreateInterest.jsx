@@ -33,6 +33,7 @@ const CreateInterest = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addNewInterest({ ...formData });
+    alert("new interest added");
   };
   return (
     <div>

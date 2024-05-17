@@ -32,7 +32,7 @@ const CreateNotes = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addNotes({ ...formData });
-    console.log(formData);
+    alert("new notes added");
   };
   return (
     <div>

@@ -42,11 +42,11 @@ const About = () => {
             >
               <div className="flex flex-col border-r p-10 md:text-xl text-center">
                 <div>Project Completed</div>
-                <div>10+</div>
+                <div>{allUserInfo?.[0].projects}</div>
               </div>
               <div className="flex flex-col  md:text-xl text-center  ">
                 <div>Experice with Coding</div>
-                <div>2+</div>
+                <div>{allUserInfo?.[0].experience}</div>
               </div>
             </div>
             <div

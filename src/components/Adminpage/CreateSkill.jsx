@@ -31,6 +31,7 @@ const CreateSkill = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addSkill({ ...formData });
+    alert("new skill created");
   };
 
   return (
