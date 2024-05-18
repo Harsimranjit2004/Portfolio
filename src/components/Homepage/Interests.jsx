@@ -10,7 +10,7 @@ const Interests = () => {
   });
   return (
     <div data-scroll data-scroll-speed=".1" className="h-auto">
-      <div className="text-white  ">
+      <div className="text-white flex flex-col items-center justify-center ">
         <div className="heading_container">
           <h2 className="p-4 pt-6 text-center text-5xl">
             Areas of <span className="text-green-500">Interest</span>
