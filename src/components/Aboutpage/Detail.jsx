@@ -114,10 +114,10 @@ const Detail = () => {
               Web Development
             </Typography>
             <Typography variant="body1" className="text-gray-300">
-              I am currently learning the fundamentals of web development,
-              focusing on HTML, CSS, and JavaScript. I aim to create
-              user-friendly websites and applications that improve user
-              experiences.
+              I am working with the MERN stack (MongoDB, Express.js, React,
+              Node.js) to build full-stack applications. I focus on creating
+              responsive and user-friendly websites that enhance user
+              experiences through modern web technologies.
             </Typography>
           </div>
         </Grid>
