@@ -4,7 +4,7 @@ import {
   useUpdateSkillsMutation,
 } from "../../features/skillsApiSlice";
 import { useNavigate, useParams } from "react-router-dom";
-
+import uploadImageToCloudinary from "../../Utils/cloundinaryUpload";
 const UpdateSkill = () => {
   const navigate = useNavigate();
   const { skillId } = useParams();
