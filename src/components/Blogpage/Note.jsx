@@ -21,12 +21,12 @@ const Note = ({ id }) => {
   const handleDeleteButton = () => {
     deleteNote({ id });
   };
-  //   console.log(note);
+  console.log(note?.fileUrl);
   return (
     <div className="w-[320px] z-[900]">
       <div className="imageContainer w-[100%] h-[200px]">
         <div className="Image m-auto w-[97%] h-[190px] hover:w-[100%] hover:h-[200px] duration-700">
-          <a href={note?.fileUrl} target="_blank">
+          <a href={note?.fileUrl} target="_blank" rel="noopener noreferrer">
             <img
               src={note?.imgUrl}
               alt=""
