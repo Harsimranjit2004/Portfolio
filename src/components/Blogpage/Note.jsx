@@ -26,7 +26,7 @@ const Note = ({ id }) => {
     <div className="w-[320px] z-[900]">
       <div className="imageContainer w-[100%] h-[200px]">
         <div className="Image m-auto w-[97%] h-[190px] hover:w-[100%] hover:h-[200px] duration-700">
-          <a href={note?.fileUrl} download>
+          <a href={note?.fileUrl}>
             <img
               src={note?.imgUrl}
               alt=""
