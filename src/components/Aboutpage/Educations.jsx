@@ -17,9 +17,12 @@ const Educations = () => {
       </h2>
       {!isLoading && (
         <VerticalTimeline>
-          {data?.ids?.map((item, index) => (
-            <Education id={item} key={index} />
-          ))}
+          {data?.ids
+            ?.slice()
+            .reverse()
+            .map((item, index) => (
+              <Education id={item} key={index} />
+            ))}
         </VerticalTimeline>
       )}
     </div>

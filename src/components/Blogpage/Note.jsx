@@ -21,7 +21,7 @@ const Note = ({ id }) => {
   const handleDeleteButton = () => {
     deleteNote({ id });
   };
-  console.log(note?.fileUrl);
+  console.log(note);
   return (
     <div className="w-[320px] z-[900]">
       <div className="imageContainer w-[100%] h-[200px]">
