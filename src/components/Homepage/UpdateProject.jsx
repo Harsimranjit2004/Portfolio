@@ -19,7 +19,7 @@ const UpdateProject = () => {
     tags: "",
     technologiesUsed: "",
     status: "",
-    highlights: [],
+    highlights: "",
     screenshots: [],
     video: [],
     details: "",
