@@ -71,7 +71,11 @@ const UpdateProject = () => {
       //   const value = e.target.value;
       const string = e.target.value;
       let value = "";
-      if (name == "tags" || name == "technologiesUsed") {
+      if (
+        name == "tags" ||
+        name == "technologiesUsed" ||
+        name == "highlights"
+      ) {
         const tagsArray = string.split(",").map((tag) => tag.trim());
         value = tagsArray;
       } else {
