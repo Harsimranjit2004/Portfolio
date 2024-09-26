@@ -24,7 +24,7 @@ const Form = () => {
 
     try {
       const response = await fetch(
-        "https://harsimranjit-singh.onrender.com/send-email",
+        "http://ec2-18-116-67-95.us-east-2.compute.amazonaws.com:3500/send-email",
         {
           method: "POST",
           headers: {
