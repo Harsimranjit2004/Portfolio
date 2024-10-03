@@ -28,9 +28,9 @@ const Hero = () => {
           <h5 className="reveal text-4xl">AI & ML</h5>
           <h5 className="reveal">&copy; 2024</h5>
         </div>
-        <h1 className="reveal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[5.5vw]">
-          <span className="md:text-[5vw] lg:text-[6.5vw]">Harsimranjit</span>{" "}
-          <span className="md:text-[5vw] lg:text-[6.5vw]">Singh</span>
+        <h1 className="reveal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[3.5vw] whitespace-nowrap">
+          <span className="md:text-[4.5vw] lg:text-[5.5vw]">Harsimranjit</span>{" "}
+          <span className="md:text-[4.5vw] lg:text-[5.5vw]">Singh</span>
         </h1>
       </div>
       <div id="green"></div>

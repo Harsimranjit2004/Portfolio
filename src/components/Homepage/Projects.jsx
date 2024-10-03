@@ -11,10 +11,10 @@ const Projects = () => {
   const [animateCart, setAnimateCart] = useState({ y: 0, opacity: 1 });
   const handleFilter = (item) => {
     setActiveFilter(item);
-    setAnimateCart([{ y: 100, opacity: 0 }]);
+    setAnimateCart([{ opacity: 0 }]);
     setTimeout(() => {
-      setAnimateCart([{ y: -0, opacity: 1 }]);
-    }, 500);
+      setAnimateCart([{ opacity: 1 }]);
+    }, 350);
   };
   const { data } = useGetProjectQuery(undefined, {
     pollingInterval: 60000,

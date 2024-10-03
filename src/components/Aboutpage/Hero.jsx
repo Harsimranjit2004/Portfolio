@@ -32,6 +32,7 @@ const Hero = () => {
             <img
               src={allUserInfo?.[0].image2}
               width={550}
+              loading="lazy"
               className="w-full h-full object-cover object-top clip-path"
             />
           </div>
@@ -50,7 +51,7 @@ const Hero = () => {
           <h3 className="text-xl md:text-3xl pt-4">
             {" "}
             {/* Adjusted text size */}I am into{" "}
-            <TypeAnimation
+            {/* <TypeAnimation
               sequence={[
                 "Web Development",
                 2000,
@@ -63,7 +64,8 @@ const Hero = () => {
               repeat={Infinity}
               cursor="|"
               style={{ color: "#21c55d" }}
-            />
+            /> */}
+            "Web Development"
           </h3>
           <p className=" md:text-lg max-w-[700px] pt-8">
             {" "}
