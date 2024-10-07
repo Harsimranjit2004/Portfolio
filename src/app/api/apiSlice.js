@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials } from "../../features/auth/authSlice";
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://ec2-18-116-67-95.us-east-2.compute.amazonaws.com:3500",
+ // baseUrl: "http://ec2-18-116-67-95.us-east-2.compute.amazonaws.com:3500",
   // baseUrl: "http://localhost:3500",
+  baseUrl: "https://portfolio-backend-v2-silk.vercel.app",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
