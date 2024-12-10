@@ -51,7 +51,10 @@ export function loader() {
   tl.to("#green", {
     height: 0,
     duration: 1,
+   
+ 
   });
+
   tl.to("#navbar", {
     height: "fit-content",
     duration: 2,
@@ -59,6 +62,7 @@ export function loader() {
     stagger: 0.1,
     ease: "power2.inOut",
   });
+  
 }
 export function rotateAnimation(selector) {
   const elements = document.querySelectorAll(selector);

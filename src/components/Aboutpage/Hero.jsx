@@ -30,13 +30,13 @@ const Hero = () => {
       </div>
       <div id="green"></div>
     
-    <div className="h-screen bg-zinc-900 text-white flex justify-center items-center pt-16 px-6 md:px-12">
+    <div className=" h-screen bg-zinc-900 text-white flex justify-center items-center pt-16 px-6 md:px-12" id="hero-section">
       <div className="max-w-[1400px] w-full grid grid-cols-1 md:grid-cols-2 items-center gap-12">
         <motion.div
           className="w-[250px] h-[250px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto rounded-full overflow-hidden shadow-2xl hover:scale-110 transition-transform duration-300"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 1, delay:2 }}
         >
           <img
             src={myImg}
