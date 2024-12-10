@@ -1,55 +1,79 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./about.css";
 import { TypeAnimation } from "react-type-animation";
-import demo from "../../assets/demo.png";
-import main from "../../assets/main.png";
+import { applyRevealAnimation } from "../../Utils/animationsUtils";
+import { loader } from "../../Utils/animationsUtils";
 import myImg from "../../assets/myImg.png";
 import { motion } from "framer-motion";
+import Navbar from "../Navbar";
 import { useSelector } from "react-redux";
 import { selectAllUserInfos } from "../../features/userInfoApiSlice";
 const Hero = () => {
   const allUserInfo = useSelector(selectAllUserInfos);
-  console.log(allUserInfo);
-  const content = (
-    <div className=" h-sc bg-zinc-900 text-white pt-[4rem] flex align-center justify-center  border-b border-gray-700 ">
-      {/* <svg height="0" width="0">
-        <defs>
-          <clipPath id="svgPath">
-            <path
-              fill="#FFFFFF"
-              stroke="#000000"
-              strokeWidth="8.1588"
-              strokeMiterlimit="7"
-              d="M273.2984313964844,337.69635009765625C229.5811538696289,312.1727879842122,164.0052286783854,213.74345906575522,192.4083709716797,186.91099548339844C220.81151326497397,160.07853190104166,400.00000762939453,151.17800649007162,443.71728515625,176.70156860351562C487.43456268310547,202.22513071695963,483.11517842610675,313.21990458170575,454.7120361328125,340.0523681640625C426.30889383951825,366.88483174641925,317.01570892333984,363.2199122111003,273.2984313964844,337.69635009765625C229.5811538696289,312.1727879842122,164.0052286783854,213.74345906575522,192.4083709716797,186.91099548339844"
-            />
-          </clipPath>
-        </defs>
-      </svg> */}
+  useEffect(() => {
+    applyRevealAnimation(".reveal");
+    loader();
+  }, []);
 
-      <div className=" max-w-[2000px] w-full my-16 flex md:flex-row flex-col justify-evenly gap-10 items-center">
-        <div className="flex">
-          <div className="w-[500px] h-[500px]">
-            <img
-              src={allUserInfo?.[0].image2}
-              width={550}
-              className="w-full h-full object-cover object-top clip-path"
-            />
-          </div>
+  const contents = (
+    <div className="hero__main text-white">
+      <Navbar isHomePage={"yes"} />
+      <div id="loader" className="w-full h-screen relative z-[9]">
+        <div className="flex flex-col items-center justify-center">
+          <h5 className="reveal text-4xl">AI & ML</h5>
+          <h5 className="reveal">&copy; 2024</h5>
         </div>
-        <div className="line-height-2 p-4">
-          {" "}
-          {/* Adjusted width */}
-          <h1 className="text-4xl lg:text-6xl md:text-5xl">Hi There 👋</h1>{" "}
-          {/* Adjusted text size */}
-          <h1 className="text-2xl lg:text-3xl ">
-            I'm{" "}
-            <span className="text-4xl lg:text-6xl md: text-5xl text-green-500">
-              Harsimranjit Singh
-            </span>
-          </h1>
-          <h3 className="text-xl md:text-3xl pt-4">
-            {" "}
-            {/* Adjusted text size */}I am into{" "}
+        <h1 className="reveal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[5.5vw]">
+          <span className="md:text-[5vw] lg:text-[6.5vw]">Harsimranjit</span>{" "}
+          <span className="md:text-[5vw] lg:text-[6.5vw]">Singh</span>
+        </h1>
+      </div>
+      <div id="green"></div>
+    
+    <div className="h-screen bg-zinc-900 text-white flex justify-center items-center pt-16 px-6 md:px-12">
+      <div className="max-w-[1400px] w-full grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+        <motion.div
+          className="w-[250px] h-[250px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto rounded-full overflow-hidden shadow-2xl hover:scale-110 transition-transform duration-300"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <img
+            src={myImg}
+            alt="Profile"
+            className="w-full h-full object-cover object-top"
+          />
+        </motion.div>
+
+        {/* Right Section: Text Content */}
+        <div className="text-center md:text-left space-y-6">
+          {/* Greeting */}
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            Hi There 👋
+          </motion.h1>
+
+          {/* Name and Role */}
+          <motion.h2
+            className="text-2xl md:text-3xl lg:text-4xl font-semibold"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
+            I'm <span className="text-green-500">Harsimranjit Singh</span>
+          </motion.h2>
+
+          <motion.h3
+            className="text-xl md:text-2xl lg:text-3xl font-medium"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 1 }}
+          >
+            I specialize in{" "}
             <TypeAnimation
               sequence={[
                 "Web Development",
@@ -59,67 +83,53 @@ const Hero = () => {
                 "Artificial Intelligence",
                 2000,
               ]}
-              speed={5}
+              speed={50}
               repeat={Infinity}
               cursor="|"
               style={{ color: "#21c55d" }}
             />
-          </h3>
-          <p className=" md:text-lg max-w-[700px] pt-8">
-            {" "}
-            {allUserInfo?.[0].AboutPage}
-          </p>
+          </motion.h3>
+
+          {/* About Me */}
+          <motion.p
+            className="text-base md:text-lg leading-relaxed max-w-[600px] mx-auto md:mx-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 1 }}
+          >
+            I’m passionate about creating scalable and efficient solutions in
+            web development, machine learning, and artificial intelligence.
+            Let’s build something amazing together!
+          </motion.p>
+
+          {/* Buttons */}
+          <motion.div
+            className="flex flex-col md:flex-row justify-center md:justify-start items-center gap-6 mt-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1 }}
+          >
+            <a
+              href="#contact"
+              className="bg-green-500 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-green-600 transition duration-300 shadow-lg"
+            >
+              Hire Me
+            </a>
+            <a
+              href="/resume.pdf"
+              download
+              className="border-2 border-green-500 text-green-500 px-6 py-2 rounded-full text-lg font-medium hover:bg-green-500 hover:text-white transition duration-300"
+            >
+              Download Resume
+            </a>
+          </motion.div>
         </div>
       </div>
+    </div>
     </div>
   );
-  return content;
-  <div className="h-screen bg-zinc-900 text-white pt-[4rem] flex align-center justify-center  ">
-    <div className=" w-full flex md:flex-row flex-col justify-evenly gap-10 items-center">
-      <div className="flex ">
-        <div className="w-[500px] h-[500px]">
-          <img
-            src={myImg}
-            width={550}
-            className="w-full h-full object-cover clip-path"
-          />
-        </div>
-      </div>
-      <div className="line-height-2">
-        <h1 className="text-6xl">Hi There 👋</h1>
-        <h1 className="text-3xl">
-          I'm{" "}
-          <span className="text-6xl text-green-500">Harsimranjit Singh</span>
-        </h1>
-        <h3 className="text-3xl pt-4  ">
-          I am into{" "}
-          <TypeAnimation
-            sequence={
-              [
-                "Web Development",
-                2000,
-                "Machine Learning",
-                2000,
-                "Artificial Intelligence",
-                2000,
-              ]
-              // { ...allUserInfo?.[0]?.roles }
-            }
-            speed={5}
-            repeat={Infinity}
-            cursor="|"
-            style={{ color: "#21c55d" }}
-          />
-        </h3>
-        <p className="text-base ">
-          a dedicated developer specializing in artificial intelligence, machine
-          learning, deep learning, and web development. With a focus on crafting
-          cutting-edge solutions, I aim to leverage technology to its fullest
-          potential, ensuring remarkable outcomes and seamless user experiences
-        </p>
-      </div>
-    </div>
-  </div>;
+
+  return contents;
 };
 
 export default Hero;

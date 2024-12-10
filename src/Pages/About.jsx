@@ -14,7 +14,6 @@ const About = () => {
   if (isSuccess) {
     content = (
       <div>
-        <Navbar isHomePage="no" />
         <Hero />
         <Detail />
         <Skills />
