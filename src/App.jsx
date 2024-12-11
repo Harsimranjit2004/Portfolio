@@ -33,7 +33,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index path="/" element={<Home />} />
+        <Route index path="/" element={<About />} />
         <Route path="project/:projectId" element={<ProjectDetail />} />
         <Route path="project-update/:projectId" element={<UpdateProject />} />
         <Route
@@ -44,7 +44,7 @@ const App = () => {
           path="/admin"
           element={<PrivateRoute element={<Admin />} redirectTo="/login" />}
         />
-        <Route path="/About" element={<About />} />
+        {/* <Route path="/About" element={<About />} /> */}
         <Route path="/Blogs" element={<Resources />} />
         <Route path="Contact" element={<Contact />} />
         <Route path="/create-blog" element={<CreateBlog />} />

@@ -9,9 +9,9 @@ const Skills = () => {
     refetchOnMountOrArgChange: true,
   });
   return (
-    <div className="bg-zinc-900 border-b border-gray-700">
+    <div className="min-h-screen bg-zinc-900 border-b border-gray-700 ">
       <div className="text-white">
-        <div className="heaind-container">
+        <div className="heading-container">
           <h2 className="p-4 pt-6 text-center text-5xl">
             My <span className="text-green-500">Skills</span>
           </h2>
