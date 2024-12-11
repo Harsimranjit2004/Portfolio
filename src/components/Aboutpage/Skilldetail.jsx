@@ -11,7 +11,6 @@ import {
 } from "react-icons/fa";
 import { SiKubernetes, SiTensorflow, SiOpencv, SiPostgresql } from "react-icons/si";
 
-// Skills Data
 const skillsData = [
   {
     category: "Machine Learning & AI",
@@ -20,8 +19,7 @@ const skillsData = [
       "PyTorch",
       "Scikit-learn",
       "XGBoost",
-      "Keras",
-
+      "Librosa",
     ],
     icon: SiTensorflow,
   },
@@ -33,12 +31,11 @@ const skillsData = [
   {
     category: "MLOps & Cloud Platforms",
     skills: [
-      "AWS SageMaker",
+      "AWS",
       "Docker",
       "Kubernetes",
       "MLflow",
       "DVC",
-
 
     ],
     icon: FaCloud,
