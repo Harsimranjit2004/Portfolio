@@ -110,3 +110,77 @@ ol {
 li {
   margin-bottom: 5px; /* Adjust margin between list items */
 }
+/* Enhance headings inside prose */
+/* Blog Content Prose Styling */
+/* Blog Content Styling */
+/* Global Blog Styles with Green Accents */
+.prose {
+  @apply text-gray-300 leading-relaxed;
+}
+
+.prose h1 {
+  @apply text-5xl font-bold text-green-400 mb-6 leading-tight;
+}
+
+.prose h2 {
+  @apply text-4xl font-semibold text-green-300 mt-8 mb-4 border-l-4 border-green-500 pl-4;
+}
+
+.prose h3 {
+  @apply text-3xl font-medium text-green-200 mt-6 mb-3;
+}
+
+.prose p {
+  @apply text-lg text-gray-300 mb-6 leading-loose;
+}
+
+.prose ul,
+.prose ol {
+  @apply list-disc list-inside space-y-2 text-gray-300 pl-6;
+}
+
+.prose pre {
+  @apply bg-zinc-800 text-green-300 p-4 rounded-lg shadow-md overflow-auto;
+}
+
+.prose code {
+  @apply bg-zinc-700 text-green-400 px-2 py-1 rounded-md font-mono text-sm;
+}
+
+.prose img {
+  @apply mx-auto rounded-lg shadow-lg my-8 border border-green-500;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-green-400 pl-4 italic text-gray-200 my-6;
+}
+
+.prose hr {
+  @apply border-gray-700 my-8;
+}
+
+.prose a {
+  @apply text-green-400 hover:text-green-300 underline transition duration-200;
+}
+
+/* Table of Contents */
+.toc-container {
+  @apply bg-zinc-800 p-6 rounded-lg shadow-lg border border-green-500;
+}
+
+.toc-container h3 {
+  @apply text-lg font-bold text-green-400 uppercase mb-4 tracking-wide;
+}
+
+.toc-container ul {
+  @apply space-y-3;
+}
+
+.toc-container li {
+  @apply text-gray-300 hover:text-green-300 cursor-pointer transition-all duration-300;
+}
+
+/* Blog Content Wrapper */
+.blog-content {
+  @apply bg-zinc-800 p-8 rounded-lg shadow-lg border border-green-400;
+}
