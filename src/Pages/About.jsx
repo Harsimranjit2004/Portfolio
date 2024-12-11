@@ -7,6 +7,10 @@ import Educations from "../components/Aboutpage/Educations";
 import Detail from "../components/Aboutpage/Detail";
 import { useGetUserInfoQuery } from "../features/userInfoApiSlice";
 import Spinner from "../Utils/Spinner";
+import SkillsBubbleChart from "../components/Aboutpage/SkillsBubbleChart";
+import SkillTree from "../components/Aboutpage/SkillTree";
+
+import ScatterSkillChart from "../components/Aboutpage/ScatterSkillChart";
 
 const About = () => {
   const { data, isSuccess } = useGetUserInfoQuery();
@@ -18,6 +22,9 @@ const About = () => {
         <Detail />
         <Skills />
         <Educations />
+        <SkillsBubbleChart/>
+        <SkillTree/>
+        <ScatterSkillChart/>
       </div>
     );
   }

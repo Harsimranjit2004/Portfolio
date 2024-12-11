@@ -91,7 +91,7 @@ import {
 
 const Detail = () => {
   return (
-    <div className="min-h-screen bg-zinc-900 text-white p-6 border-t border-b border-gray-700">
+    <div className="min-h-screen bg-zinc-900 text-white p-6 border-t border-b border-gray-700 md:flex flex-col justify-around">
       {/* Title Section */}
       <div>
         <Typography variant="h4" align="center" gutterBottom>
@@ -100,7 +100,7 @@ const Detail = () => {
       </div>
 
       {/* Grid Section */}
-      <div>
+      <div >
         <Grid container spacing={4} justifyContent="center" className="pt-0">
           {/* AI & Machine Learning */}
           <Grid item xs={10} sm={5}>
