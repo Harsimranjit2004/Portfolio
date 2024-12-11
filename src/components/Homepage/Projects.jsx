@@ -1,236 +1,120 @@
-import React from "react";
-import { useState } from "react";
-import { useGetProjectQuery } from "../../features/projectsApiSlice";
-import { motion } from "framer-motion";
-import Project from "./Project";
+
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { selectAllUserInfos } from "../../features/userInfoApiSlice";
+// import { useGetProjectQuery } from "../../features/projectApiSlice";
+
+import Project from "./Project";
+import { useNavigate } from "react-router-dom";
+import { useDeleteProjectMutation, useGetProjectQuery } from "../../features/projectsApiSlice";
+
 const Projects = () => {
-  const allUserInfo = useSelector(selectAllUserInfos);
   const [activeFilter, setActiveFilter] = useState("All");
-  const [animateCart, setAnimateCart] = useState({ y: 0, opacity: 1 });
-  const handleFilter = (item) => {
-    setActiveFilter(item);
-    setAnimateCart([{ y: 100, opacity: 0 }]);
-    setTimeout(() => {
-      setAnimateCart([{ y: -0, opacity: 1 }]);
-    }, 500);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+
+  // Fetch projects using Redux Toolkit Query
+  const { data: projects, isLoading } = useGetProjectQuery();
+  const projectList = projects?.ids.map((id) => projects.entities[id]) || [];
+
+  // Filtered Projects
+  const filteredProjects =
+    activeFilter === "All"
+      ? projectList
+      : projectList.filter((project) =>
+          project?.tags?.includes(activeFilter)
+        );
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
   };
-  const { data } = useGetProjectQuery(undefined, {
-    pollingInterval: 60000,
-    refetchOnFocus: true,
-    refetchOnMountOrArgChange: true,
-  });
-  // console.log(data);
+
+  const handlePrev = () => {
+    setCurrentIndex(
+      (prev) => (prev - 1 + filteredProjects.length) % filteredProjects.length
+    );
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-white text-2xl">Loading...</p>
+      </div>
+    );
+  }
+
   return (
-    <div
-      data-scroll
-      data-scroll-speed=".1"
-      className=" h-auto text-white border-b border-gray-700"
-    >
-      <div className="heading-container">
-        <h1 className="p-4 pt-6 text-center text-5xl">
-          My Creative{"  "}
-          <span className="text-green-500">Projects</span>
+    <div className="bg-zinc-900 text-gray-200 py-12">
+      <div className="text-center mb-8">
+        <h1 className="text-5xl font-bold text-white">
+          My Creative <span className="text-green-500">Projects</span>
         </h1>
       </div>
-      <div className="project__filter">
-        {allUserInfo?.[0].tags.map((item, index) => (
+
+      {/* Filter Buttons */}
+      <div className="flex justify-center flex-wrap gap-4 mb-8">
+        {["All", "Data Science", "Web Development", "C++", "DevOps"].map(
+          (item) => (
+            <button
+              key={item}
+              onClick={() => {
+                setActiveFilter(item);
+                setCurrentIndex(0); // Reset index on filter change
+              }}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                activeFilter === item
+                  ? "bg-green-500 text-white"
+                  : "bg-zinc-700 hover:bg-green-600 hover:text-white"
+              }`}
+            >
+              {item}
+            </button>
+          )
+        )}
+      </div>
+
+      {/* Carousel */}
+      <div className="relative flex items-center justify-center">
+        <button
+          onClick={handlePrev}
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white text-2xl z-10"
+        >
+          &larr;
+        </button>
+
+        <div className="w-full max-w-4xl mx-auto p-4">
+          {filteredProjects.length > 0 ? (
+            <Project id = {filteredProjects[currentIndex].id} project={filteredProjects[currentIndex]} />
+          ) : (
+            <p className="text-center text-gray-400">
+              No projects found for this category.
+            </p>
+          )}
+        </div>
+
+        <button
+          onClick={handleNext}
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white text-2xl z-10"
+        >
+          &rarr;
+        </button>
+      </div>
+
+      {/* Pagination Dots */}
+      <div className="flex justify-center gap-2 mt-6">
+        {filteredProjects.map((_, index) => (
           <div
-            key={`${item}-${index}`}
-            onClick={() => handleFilter(item)}
-            className={`projects__filter__item ${
-              activeFilter === item ? "item-active" : ""
+            key={index}
+            className={`w-3 h-3 rounded-full ${
+              index === currentIndex
+                ? "bg-green-500"
+                : "bg-zinc-700 hover:bg-green-400"
             }`}
-          >
-            {item}
-          </div>
+          ></div>
         ))}
       </div>
-      <motion.div
-        animate={animateCart}
-        transition={{ duration: 0.5, delayChildren: 0.5 }}
-        className="work__portfolio gap-5 p-4 pb-6"
-      >
-        {data?.ids?.map(
-          (item, index) =>
-            data?.entities[item].tags.includes(activeFilter) && (
-              <Project id={item} key={index} filter={activeFilter} />
-            )
-        )}
-      </motion.div>
+   
     </div>
   );
 };
+
 export default Projects;
-{
-  /* <div className="project__filter"> */
-}
-{
-  /* //             {allUserInfo[0]?.tags?.map( */
-}
-//                (item, index) => (
-//                   <div
-//                      key={item}
-//                      onClick={() => handleFilter(item)}
-//                      className={`projects__filter__item ${
-//                         activeFilter === item ? "item-active" : ""
-//                      }`}
-//                   >
-//                      {item}
-//                   </div>
-//                )
-//             )}
-//          </div>
-// export default Projects;
-// import React from "react";
-// import { motion } from "framer-motion";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faGithub } from "@fortawesome/free-brands-svg-icons";
-// import { faEye } from "@fortawesome/free-solid-svg-icons";
-// import { useSelector } from "react-redux";
-// import {
-//    projectApiSlice,
-//    useDeleteProjectMutation,
-// } from "../../features/projectApiSlice";
-// import { useNavigate } from "react-router-dom";
-// import './home.css'
-// const Project = ({ id, filter }) => {
-//    const navigate = useNavigate();
-//    const { project } = projectApiSlice.useGetProjectQuery(undefined, {
-//       selectFromResult: ({ data }) => ({
-//          project: data?.entities[id],
-//       }),
-//    });
-//    const [deleteProject] = useDeleteProjectMutation();
-//    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-//    const handleUpdateButton = () => {
-//       navigate(`/project/${id}`);
-//    };
-//    const handleDelete = () => {
-//       deleteProject({ id });
-//    };
-//    return (
-//       <div className="work__item project__flex">
-//          <div className="work__img project__flex">
-//             <img src={require("../../assets/demo.png")} alt={project?.title} />
-//             <motion.div
-//                whileHover={{ opacity: [0, 1] }}
-//                transition={{
-//                   duration: 0.25,
-//                   ease: "easeInOut",
-//                   staggerChildren: 0.5,
-//                }}
-//                className="work__hover project__flex"
-//             >
-//                <a href={project?.projectLink} target="_blank" rel="noreferrer">
-//                   <motion.div
-//                      whileInView={{ scale: [0, 1] }}
-//                      whileHover={{ scale: [1, 0.9] }}
-//                      transition={{ duration: 0.25 }}
-//                      className="project__flex"
-//                   >
-//                      <FontAwesomeIcon
-//                         className="project__icon"
-//                         icon={faGithub}
-//                      />
-//                   </motion.div>
-//                </a>
-//                <a href={project?.projectLink} target="_blank" rel="noreferrer">
-//                   <motion.div
-//                      whileInView={{ scale: [0, 1] }}
-//                      whileHover={{ scale: [1, 0.9] }}
-//                      transition={{ duration: 0.25 }}
-//                      className="project__flex"
-//                   >
-//                      <FontAwesomeIcon className="project__icon" icon={faEye} />
-//                   </motion.div>
-//                </a>
-//             </motion.div>
-//          </div>
-//          <div className="project__flex project__content">
-//             <h4 className="bold-text">{project?.title}</h4>
-//             <p className="p-text" style={{ marginTop: 10 }}>
-//                {" "}
-//                {project?.description}
-//             </p>
-//             <div className="project__tag project__flex">
-//                <p className="p-text" style={{ textAlign: "left" }}>
-//                   {/* {project?.tags?.[0]} */}
-//                   {filter}
-//                </p>
-//             </div>
-//             {isAuthenticated && (
-//                <div className="project__admin__button">
-//                   <button onClick={handleUpdateButton}>update</button>
-//                   <button onClick={handleDelete}>Delete</button>
-//                </div>
-//             )}
-//          </div>
-//       </div>
-//    );
-// };
-
-// export default Project;
-// import React, { useState } from "react";
-// import { motion } from "framer-motion";
-// import Project from "./Project";
-// import { useGetProjectQuery } from "../../features/projectApiSlice";
-// import { useSelector } from "react-redux";
-// import { selectAllUserInfo } from "../../features/userInfoApiSlice";
-// import './home.css'
-// const Projects = () => {
-//    const allUserInfo = useSelector(selectAllUserInfo);
-//    const [activeFilter, setActiveFilter] = useState("All");
-//    const [animateCart, setAnimateCart] = useState({ y: 0, opacity: 1 });
-//    const handleFilter = (item) => {
-//       setActiveFilter(item);
-//       setAnimateCart([{ y: 100, opacity: 0 }]);
-//       setTimeout(() => {
-//          setAnimateCart([{ y: -0, opacity: 1 }]);
-//       }, 500);
-//    };
-
-//    const { data } = useGetProjectQuery(undefined, {
-//       pollingInterval: 60000,
-//       refetchOnFocus: true,
-//       refetchOnMountOrArgChange: true,
-//    });
-//    const content = (
-//       <div className="projects__main">
-//          <h2 className="p                 rojects__heading">
-//             <span>My Creative Projects</span>
-//          </h2>
-//          <div className="project__filter">
-//             {allUserInfo[0]?.tags?.map(
-//                (item, index) => (
-//                   <div
-//                      key={item}
-//                      onClick={() => handleFilter(item)}
-//                      className={`projects__filter__item ${
-//                         activeFilter === item ? "item-active" : ""
-//                      }`}
-//                   >
-//                      {item}
-//                   </div>
-//                )
-//             )}
-//          </div>
-//          <motion.div
-//             animate={animateCart}
-//             transition={{ duration: 0.5, delayChildren: 0.5 }}
-//             className="work__portfolio"
-//          >
-//             {data?.ids?.map(
-//                (item, index) =>
-//                   data?.entities[item].tags.includes(activeFilter) && (
-//                      <Project id={item} key={index} filter={activeFilter} />
-//                   )
-//             )}
-//          </motion.div>
-//       </div>
-//    );
-//    return content;
-// };
-
-// export default Projects;

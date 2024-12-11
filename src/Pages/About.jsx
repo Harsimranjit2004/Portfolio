@@ -12,6 +12,7 @@ import SkillTree from "../components/Aboutpage/SkillTree";
 
 import ScatterSkillChart from "../components/Aboutpage/ScatterSkillChart";
 import SkillsPage from "../components/Aboutpage/Skilldetail";
+import Projects from "../components/Homepage/Projects";
 
 const About = () => {
   const { data, isSuccess } = useGetUserInfoQuery();
@@ -22,11 +23,10 @@ const About = () => {
         <Hero />
         <Detail />
         {/* <Skills /> */}
+        <Projects/>
         <SkillsPage/>
         <Educations />
-        {/* <SkillsBubbleChart/> */}
-        {/* <SkillTree/> */}
-        {/* <ScatterSkillChart/> */}
+
       </div>
     );
   }

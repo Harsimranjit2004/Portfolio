@@ -6,37 +6,67 @@ import {
   FaDatabase,
   FaNodeJs,
   FaAws,
+  FaUserFriends,
+  FaCloud,
 } from "react-icons/fa";
 import { SiKubernetes, SiTensorflow, SiOpencv, SiPostgresql } from "react-icons/si";
 
 // Skills Data
 const skillsData = [
   {
+    category: "Machine Learning & AI",
+    skills: [
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-learn",
+      "XGBoost",
+      "Keras",
+
+    ],
+    icon: SiTensorflow,
+  },
+  {
     category: "Programming Languages",
-    skills: ["C++", "Python", "JavaScript", "Java"],
+    skills: ["Python", "C++", "JavaScript", "Java", "SQL"],
     icon: FaPython,
   },
   {
-    category: "Frameworks & Libraries",
-    skills: ["React.js", "Node.js", "TensorFlow", "OpenCV"],
-    icon: FaReact,
+    category: "MLOps & Cloud Platforms",
+    skills: [
+      "AWS SageMaker",
+      "Docker",
+      "Kubernetes",
+      "MLflow",
+      "DVC",
+
+
+    ],
+    icon: FaCloud,
   },
   {
-    category: "Tools & Platforms",
-    skills: ["Git", "Docker", "AWS", "Kubernetes"],
-    icon: FaDocker,
-  },
-  {
-    category: "Databases",
-    skills: ["MySQL", "PostgreSQL", "MongoDB", "SQLite"],
+    category: "Data Engineering",
+    skills: [
+      "Apache Spark",
+      "Kafka",
+      "Hadoop",
+      "Airflow",
+      "ETL Pipelines",
+    ],
     icon: FaDatabase,
   },
   {
     category: "Soft Skills",
-    skills: ["Problem-Solving", "Teamwork", "Communication", "Leadership"],
-    icon: SiTensorflow,
+    skills: [
+      "Problem-Solving",
+      "Critical Thinking",
+      "Communication",
+      "Leadership",
+      "Teamwork",
+    ],
+    icon: FaUserFriends,
   },
 ];
+
 
 const SkillsSection = () => {
   return (
@@ -52,7 +82,7 @@ const SkillsSection = () => {
       </div>
 
       {/* Skills Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto work__portfolio ">
         {skillsData.map((category, index) => (
           <div
             key={index}

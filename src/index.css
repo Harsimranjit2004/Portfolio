@@ -184,3 +184,31 @@ li {
 .blog-content {
   @apply bg-zinc-800 p-8 rounded-lg shadow-lg border border-green-400;
 }
+/* Projects Component */
+.slick-prev,
+.slick-next {
+  color: #21c55d;
+  font-size: 24px;
+  z-index: 10;
+}
+
+.slick-dots li button:before {
+  color: #4ade80; /* Green dots */
+  opacity: 0.5;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #21c55d; /* Active dot */
+  opacity: 1;
+}
+
+.project {
+  background: #1f2937; /* zinc-800 */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.project:hover {
+  transform: scale(1.03);
+  transition: all 0.3s ease;
+}

@@ -13,7 +13,7 @@ const BlogDetail = () => {
       blog: data?.entities[blogId],
     }),
   });
-
+console.log(blog?.content)
   useEffect(() => {
     if (blog?.createdAt) setDate(formatDate(blog?.createdAt));
   }, [blog]);
