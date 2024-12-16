@@ -75,10 +75,20 @@ console.log(project)
           </button>
         </div>
         {isAuthenticated && (
-               <div className="project__admin__button">
-                  <button onClick={handleUpdateButton}>update</button>
-                  <button onClick={handleDelete}>Delete</button>
-               </div>
+               <div className="flex gap-5 mt-2">
+               <button
+                 className="bg-green-500 p-2 rounded-full"
+                 onClick={handleDelete}
+               >
+                 Delete
+               </button>
+               <button
+                 className="bg-green-500 p-2 rounded-full"
+                 onClick={handleUpdateButton}
+               >
+                 Update
+               </button>
+             </div>
             )}
       </div>
     </div>

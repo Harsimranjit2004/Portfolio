@@ -23,20 +23,69 @@ const Login = () => {
   const dispatch = useDispatch();
   const [login] = useLoginMutation();
 
+  // const handleLogin = async (e) => {
+  //   console.log('he')
+  //   e.preventDefault();
+
+  //   const username = formData?.username;
+  //   const password = formData?.password;
+  //   try {
+
+  //       const { accessToken } = await login({ username, password }).unwrap()
+  //       dispatch(setCredentials({ accessToken }))
+  //       setUsername('')
+  //       setPassword('')
+  //       navigate('/admin')
+  //   } catch (err) {
+  //       if (!err.status) {
+  //           // setErrMsg('No Server Response');
+  //           console.log("no server response ")
+  //       } else if (err.status === 400) {
+  //           console.log('Missing Username or Password');
+  //       } else if (err.status === 401) {
+  //           console.log('Unauthorized');
+  //       } else {
+  //           console.log(err.data?.message);
+  //       }
+  //       // errRef.current.focus();
+  //   }
+  //     // const { accessToken } = await login({ username, password }).unwrap();
+  //     // console.log(accessToken)
+  //     // dispatch(setCredentials({ accessToken }));
+  //     // setFromData({ username: "", password: "" });
+  //     // navigate("/admin");
+  //   // } catch (err) {
+  //   //   console.log(err);
+  //   // }
+  // };
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    const username = formData?.username;
-    const password = formData?.password;
+  
+    const { username, password } = formData;
+  
     try {
-      const { accessToken } = await login({ username, password }).unwrap();
-      dispatch(setCredentials({ accessToken }));
+      // Send login request
+      await login({ username, password }).unwrap();
+  
+      // Dispatch setCredentials to mark user as authenticated
+      dispatch(setCredentials());
+  
+      // Clear form and navigate to admin page
       setFromData({ username: "", password: "" });
       navigate("/admin");
     } catch (err) {
-      console.log(err);
+      if (!err.status) {
+        console.log("No server response");
+      } else if (err.status === 400) {
+        console.log("Missing Username or Password");
+      } else if (err.status === 401) {
+        console.log("Unauthorized");
+      } else {
+        console.log(err.data?.message || "Login failed");
+      }
     }
   };
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-80">

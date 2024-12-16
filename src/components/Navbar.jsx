@@ -1,24 +1,150 @@
+// import React, { useState } from "react";
+// import main_logo from "../assets/main_logo.png";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faBars, faClose, faHouse } from "@fortawesome/free-solid-svg-icons";
+// import { menuItems } from "../config/menuItems";
+// import { Link, useNavigate } from "react-router-dom";
+// const Navbar = ({ isHomePage }) => {
+//   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+//   const onDropDownButtonClicked = () => {
+//     setIsSideBarOpen((prev) => !prev);
+//   };
+//   const navigate = useNavigate();
+//   const handleAdmin = () => {
+//     navigate("/login");
+//   };
+//   return (
+//     <div className="overflow-hidden">
+//       <nav
+//         id={`${isHomePage == "yes" ? "navbar" : ""}`}
+//         className={`hidden text-white  absolute ${
+//           isHomePage == "yes" ? "h-0" : "h-fit"
+//         } z-[88] md:flex items-center justify-between w-full overflow-hidden md:px-4`}
+//       >
+//         <div className="flex items-center">
+//           <div
+//             className="flex justify-center items-center object-cover w-[4vw] h-[4vw] sm:mr-6 md:mr-16 cursor-pointer"
+//             onClick={() => navigate("/")}
+//           >
+//             <img src={main_logo} alt="" className="cursor-pointer" />
+//           </div>
+//         </div>
+//         <div className="flex items-center md:text-2xl">
+//           <div className="flex justify-between">
+//             {menuItems.map((item, index) => (
+//               <Link
+//                 key={index}
+//                 className="sm:mx-4 cursor-pointer block z-2"
+//                 to={item.path}
+//               >
+//                 {item.name}
+//               </Link>
+//             ))}
+//             <FontAwesomeIcon
+//               className="cursor-pointer"
+//               icon={faHouse}
+//               onClick={handleAdmin}
+//             />
+//           </div>
+//         </div>
+//       </nav>
+//       <div className=" md:hidden absolute  h-0 z-[88]  w-full p-4 ">
+//         <div className="  flex align-center  justify-between ">
+//           <div className="flex   items-center  w-[5vh]  sm:mr-6  cursor-pointer">
+//             <img
+//               src={main_logo}
+//               alt=""
+//               className="cursor-pointer w-full h-full object-cover "
+//             />
+//           </div>
+//           {!isSideBarOpen && (
+//             <div className="burger">
+//               <FontAwesomeIcon
+//                 icon={faBars}
+//                 style={{ color: "white" }}
+//                 onClick={onDropDownButtonClicked}
+//                 className="w-[5vh]"
+//               />
+//             </div>
+//           )}
+//           {isSideBarOpen && (
+//             <div className="burger">
+//               <FontAwesomeIcon
+//                 style={{ color: "white" }}
+//                 icon={faClose}
+//                 onClick={onDropDownButtonClicked}
+//                 className=" "
+//               />
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//       {/* </div> */}
+//       {isSideBarOpen && (
+//         <div className="nav__dropdown">
+//           {menuItems.map((item) => (
+//             <div className="nav__dropdown__item text-white" key={item.name}>
+//               <Link
+//                 className="nav__items"
+//                 to={item.path}
+//                 onClick={onDropDownButtonClicked}
+//               >
+//                 {item.name}
+//               </Link>
+//             </div>
+//           ))}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Navbar;
 import React, { useState } from "react";
 import main_logo from "../assets/main_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faClose, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { menuItems } from "../config/menuItems";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logOut } from "../features/auth/authSlice";
+import { useSendLogoutMutation } from "../features/auth/authApiSlice";
+
 const Navbar = ({ isHomePage }) => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const [sendLogout] = useSendLogoutMutation(); // Logout mutation for clearing server-side cookies
+
+  // Toggle Sidebar
   const onDropDownButtonClicked = () => {
     setIsSideBarOpen((prev) => !prev);
   };
-  const navigate = useNavigate();
-  const handleAdmin = () => {
+
+  // Handle Logout
+  const handleLogout = async () => {
+    try {
+      await sendLogout().unwrap(); // Call logout API
+      dispatch(logOut()); // Clear Redux state
+      navigate("/"); // Redirect to login
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+  };
+
+  // Navigate to login page
+  const handleLogin = () => {
     navigate("/login");
   };
+
   return (
     <div className="overflow-hidden">
       <nav
-        id={`${isHomePage == "yes" ? "navbar" : ""}`}
-        className={`hidden text-white  absolute ${
-          isHomePage == "yes" ? "h-0" : "h-fit"
+        id={`${isHomePage === "yes" ? "navbar" : ""}`}
+        className={`hidden text-white absolute ${
+          isHomePage === "yes" ? "h-0" : "h-fit"
         } z-[88] md:flex items-center justify-between w-full overflow-hidden md:px-4`}
       >
         <div className="flex items-center">
@@ -26,7 +152,7 @@ const Navbar = ({ isHomePage }) => {
             className="flex justify-center items-center object-cover w-[4vw] h-[4vw] sm:mr-6 md:mr-16 cursor-pointer"
             onClick={() => navigate("/")}
           >
-            <img src={main_logo} alt="" className="cursor-pointer" />
+            <img src={main_logo} alt="Logo" className="cursor-pointer" />
           </div>
         </div>
         <div className="flex items-center md:text-2xl">
@@ -40,24 +166,37 @@ const Navbar = ({ isHomePage }) => {
                 {item.name}
               </Link>
             ))}
-            <FontAwesomeIcon
-              className="cursor-pointer"
-              icon={faHouse}
-              onClick={handleAdmin}
-            />
+
+            {/* Conditional Login/Logout */}
+            {isAuthenticated ? (
+              <button
+                className="text-red-400 hover:text-red-600 mx-4"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            ) : (
+              <FontAwesomeIcon
+                className="cursor-pointer mx-4"
+                icon={faHouse}
+                onClick={handleLogin}
+              />
+            )}
           </div>
         </div>
       </nav>
-      <div className=" md:hidden absolute  h-0 z-[88]  w-full p-4 ">
-        <div className="  flex align-center  justify-between ">
-          <div className="flex   items-center  w-[5vh]  sm:mr-6  cursor-pointer">
+
+      {/* Mobile View */}
+      <div className="md:hidden absolute h-0 z-[88] w-full p-4">
+        <div className="flex align-center justify-between">
+          <div className="flex items-center w-[5vh] sm:mr-6 cursor-pointer">
             <img
               src={main_logo}
-              alt=""
-              className="cursor-pointer w-full h-full object-cover "
+              alt="Logo"
+              className="cursor-pointer w-full h-full object-cover"
             />
           </div>
-          {!isSideBarOpen && (
+          {!isSideBarOpen ? (
             <div className="burger">
               <FontAwesomeIcon
                 icon={faBars}
@@ -66,8 +205,7 @@ const Navbar = ({ isHomePage }) => {
                 className="w-[5vh]"
               />
             </div>
-          )}
-          {isSideBarOpen && (
+          ) : (
             <div className="burger">
               <FontAwesomeIcon
                 style={{ color: "white" }}
@@ -79,7 +217,7 @@ const Navbar = ({ isHomePage }) => {
           )}
         </div>
       </div>
-      {/* </div> */}
+
       {isSideBarOpen && (
         <div className="nav__dropdown">
           {menuItems.map((item) => (
@@ -93,6 +231,22 @@ const Navbar = ({ isHomePage }) => {
               </Link>
             </div>
           ))}
+          {/* Conditional Login/Logout for Mobile */}
+          {isAuthenticated ? (
+            <button
+              className="text-red-400 hover:text-red-600 mt-4"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              className="text-green-400 hover:text-green-600 mt-4"
+              onClick={handleLogin}
+            >
+              Login
+            </button>
+          )}
         </div>
       )}
     </div>
