@@ -115,8 +115,9 @@ const Hero = () => {
             >
               Hire Me
             </a>
+
             <a
-              href="/resume.pdf"
+              href={allUserInfo?.[0].resume}
               download
               className="border-2 border-green-500 text-green-500 px-6 py-2 rounded-full text-lg font-medium hover:bg-green-500 hover:text-white transition duration-300"
             >
