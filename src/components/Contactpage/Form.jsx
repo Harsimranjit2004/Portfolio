@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMailForward, faPhone } from "@fortawesome/free-solid-svg-icons";
@@ -44,8 +43,8 @@ const Form = () => {
   };
 
   return (
-    <div className="bg-zinc-900 text-gray-200 min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-4xl flex flex-col items-center gap-8">
+    <div className="bg-zinc-900 text-gray-200 min-h-screen flex items-center justify-center px-4 py-8 md:py-0">
+      <div className="w-full max-w-4xl flex flex-col items-center gap-8 my-8 md:my-0">
         {/* Section Title */}
         <div className="text-center">
           <h1 className="text-4xl font-bold text-white">

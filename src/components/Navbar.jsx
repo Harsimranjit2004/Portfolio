@@ -232,7 +232,7 @@ const Navbar = ({ isHomePage }) => {
             </div>
           ))}
           {/* Conditional Login/Logout for Mobile */}
-          {isAuthenticated ? (
+          {/* {isAuthenticated ? (
             <button
               className="text-red-400 hover:text-red-600 mt-4"
               onClick={handleLogout}
@@ -246,7 +246,7 @@ const Navbar = ({ isHomePage }) => {
             >
               Login
             </button>
-          )}
+          )} */}
         </div>
       )}
     </div>
