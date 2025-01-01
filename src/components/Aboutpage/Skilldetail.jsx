@@ -6,6 +6,7 @@ import {
   FaDatabase,
   FaNodeJs,
   FaAws,
+  FaRobot,
   FaUserFriends,
   FaCloud,
 } from "react-icons/fa";
@@ -40,17 +41,19 @@ const skillsData = [
     ],
     icon: FaCloud,
   },
+  
   {
-    category: "Data Engineering",
+    category: "Generative AI",
     skills: [
-      "Apache Spark",
-      "Kafka",
-      "Hadoop",
-      "Airflow",
-      "ETL Pipelines",
+      "Hugging Face Transformers",
+      "LangChain",
+      "Hugging Face Diffusers",
+      "OpenAI API",
+      "PyTorch Lightning",
     ],
-    icon: FaDatabase,
+    icon: FaRobot,
   },
+  
   {
     category: "Soft Skills",
     skills: [
