@@ -110,7 +110,7 @@ const Hero = () => {
             transition={{ delay: 0.8, duration: 1 }}
           >
             <a
-              href="#contact"
+              href="/Contact"
               className="bg-green-500 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-green-600 transition duration-300 shadow-lg"
             >
               Hire Me
