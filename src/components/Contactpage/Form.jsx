@@ -12,6 +12,7 @@ const Form = () => {
     message: "",
   });
   const [isFormSubmitted, setFormSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { name, email, message } = formData;
 
   const handleChangeInput = (e) => {
@@ -21,6 +22,21 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Basic validation
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    setIsLoading(true);
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BASE_URL}/send-email`,
@@ -32,14 +48,17 @@ const Form = () => {
       );
 
       if (response.ok) {
-        setIsFormSubmitted(true);
+        setFormSubmitted(true);
         setFormData({ name: "", email: "", message: "" });
       } else {
-        alert("Error sending message. Try again later.");
+        const errorData = await response.json();
+        alert(errorData.message || "Error sending message. Please try again later.");
       }
     } catch (error) {
-      console.log(error)
-      alert("An error occurred.");
+      console.error("Form submission error:", error);
+      alert("Network error occurred. Please check your connection and try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -126,9 +145,10 @@ const Form = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition duration-300"
+              disabled={isLoading}
+              className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition duration-300 disabled:bg-green-700 disabled:cursor-not-allowed"
             >
-              Send Message
+              {isLoading ? "Sending..." : "Send Message"}
             </button>
           </form>
         ) : (
