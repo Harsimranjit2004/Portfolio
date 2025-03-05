@@ -38,7 +38,8 @@ const Form = () => {
         alert("Error sending message. Try again later.");
       }
     } catch (error) {
-      alert("An error occurred. Try again. Gaand maar gyi code di");
+      console.log(error)
+      alert("An error occurred.");
     }
   };
 
