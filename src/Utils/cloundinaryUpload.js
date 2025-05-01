@@ -1,64 +1,83 @@
-// import { Cloudinary, Qualifiers } from "@cloudinary/url-gen";
-// import { CloudinaryImage } from "@cloudinary/url-gen";
+// // import { Cloudinary, Qualifiers } from "@cloudinary/url-gen";
+// // import { CloudinaryImage } from "@cloudinary/url-gen";
 
-// const uploadToCloudinary = async (file) => {
+// // const uploadToCloudinary = async (file) => {
+// //   try {
+// //     const cloudName = "dpkonhpvd"; // Replace with your Cloudinary cloud name
+// //     const cld = new Cloudinary({ cloud: { cloudName } });
+
+// //     // Create ImageUpload action with file data and optional transformations
+// //     const upload = new ImageUpload(file, {
+// //       folder: "uploads", // Set folder name if needed
+// //       // Optional transformations
+// //       transformation: new Qualifiers()
+// //         .resize()
+// //         .width(500)
+// //         .height(500)
+// //         .gravity("auto"),
+// //     });
+
+// //     // Upload the image
+// //     const response = await cld.upload(upload);
+
+// //     console.log("Uploaded:", response.secure_url);
+// //     return response.secure_url;
+// //   } catch (error) {
+// //     console.error("Error uploading file to Cloudinary:", error);
+// //     throw error;
+// //   }
+// // };
+
+// // export default uploadToCloudinary;
+// const uploadImageToCloudinary = async (file) => {
 //   try {
 //     const cloudName = "dpkonhpvd"; // Replace with your Cloudinary cloud name
-//     const cld = new Cloudinary({ cloud: { cloudName } });
+//     const uploadPreset = "ubnzk7ik"; // Replace with your Cloudinary upload preset
 
-//     // Create ImageUpload action with file data and optional transformations
-//     const upload = new ImageUpload(file, {
-//       folder: "uploads", // Set folder name if needed
-//       // Optional transformations
-//       transformation: new Qualifiers()
-//         .resize()
-//         .width(500)
-//         .height(500)
-//         .gravity("auto"),
-//     });
+//     const formData = new FormData();
+//     formData.append("file", file);
+//     formData.append("upload_preset", uploadPreset);
+//     formData.append("use_filename", "true");
+//     formData.append("unique_filename", "false");
+//     // formData.append("overwrite", "true");
 
-//     // Upload the image
-//     const response = await cld.upload(upload);
+//     const response = await fetch(
+//       `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`,
+//       {
+//         method: "POST",
+//         body: formData,
+//       }
+//     );
 
-//     console.log("Uploaded:", response.secure_url);
-//     return response.secure_url;
+//     if (!response.ok) {
+//       throw new Error("Failed to upload file to Cloudinary");
+//     }
+
+//     const data = await response.json();
+//     return data.secure_url;
 //   } catch (error) {
 //     console.error("Error uploading file to Cloudinary:", error);
 //     throw error;
 //   }
 // };
 
-// export default uploadToCloudinary;
-const uploadImageToCloudinary = async (file) => {
-  try {
-    const cloudName = "dpkonhpvd"; // Replace with your Cloudinary cloud name
-    const uploadPreset = "ubnzk7ik"; // Replace with your Cloudinary upload preset
+// export default uploadImageToCloudinary;
+export default async function uploadImageToCloudinary(file) {
+  const cloudName = "dpkonhpvd";
+  const uploadPreset = "ubnzk7ik";
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", uploadPreset);
-    formData.append("use_filename", "true");
-    formData.append("unique_filename", "false");
-    // formData.append("overwrite", "true");
+  const fd = new FormData();
+  fd.append("file", file);
+  fd.append("upload_preset", uploadPreset);
 
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+  const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`; // image ► not auto
 
-    if (!response.ok) {
-      throw new Error("Failed to upload file to Cloudinary");
-    }
+  const res = await fetch(url, { method: "POST", body: fd });
+  const payload = await res.json().catch(() => ({}));         // read body even on error
 
-    const data = await response.json();
-    return data.secure_url;
-  } catch (error) {
-    console.error("Error uploading file to Cloudinary:", error);
-    throw error;
+  if (!res.ok) {
+    console.error("Cloudinary rejected the upload:", payload);
+    throw new Error(payload.error?.message ?? res.statusText);
   }
-};
-
-export default uploadImageToCloudinary;
+  return payload.secure_url;                                   // success!
+}

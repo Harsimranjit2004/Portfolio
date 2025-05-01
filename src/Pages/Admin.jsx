@@ -38,6 +38,18 @@ const Admin = () => {
               justifyContent: "center",
             }}
             className="border-2 border-gray-300 hover:gap-5 text-zinc-900 font-bold py-2 px-8 rounded  flex gap-4"
+            onClick={() => navigate(`/create-learning`)}
+          >
+            <div className="ml-1"> Create Learnings</div>
+            <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+          <button
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            className="border-2 border-gray-300 hover:gap-5 text-zinc-900 font-bold py-2 px-8 rounded  flex gap-4"
             onClick={() => navigate(`/`)}
           >
             <div className="ml-1">Go Back</div>
@@ -68,6 +80,7 @@ const Admin = () => {
           <h2 className="text-center text-[30px]">Update User</h2>
           <UpdateUser />
         </div>
+
         <div className="border-b border-gray-700 pb-[60px]">
           <h2 className="text-center text-[30px]">Update UserInfo</h2>
           <FetchingData />

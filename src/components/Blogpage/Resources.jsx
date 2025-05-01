@@ -3,6 +3,7 @@ import Navbar from "../Navbar";
 import { Tab, Tabs } from "@mui/material";
 import Blogs from "./Blogs";
 import Notes from "./Notes";
+import Learnings from "./Learnings";
 const Resources = () => {
   const [selectedTab, setSelectedTab] = useState("blogs");
 
@@ -28,6 +29,7 @@ const Resources = () => {
         >
           <Tab value="blogs" label="Blogs" />
           <Tab value="notes" label="Notes" />
+          <Tab value="learning" label="Learning" />
           {/* <Tab value="notebooks" label="Notebooks" /> */}
         </Tabs>
       </div>
@@ -42,6 +44,12 @@ const Resources = () => {
           <div className="text-white">
             {" "}
             <Notes />
+          </div>
+        )}
+        {selectedTab === "learning" && (
+          <div className="text-white">
+            {" "}
+            <Learnings />
           </div>
         )}
       </div>

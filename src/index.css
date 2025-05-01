@@ -5,6 +5,7 @@
 body::-webkit-scrollbar {
   display: none;
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -12,8 +13,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
 }
+
 /* .flex{
   display: flex;
   align-items: center;
@@ -23,11 +25,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-*{
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 .parent {
   display: inline-block;
   overflow: hidden;
@@ -38,12 +42,13 @@ code {
   display: block;
   transition: transform 0.5s ease;
 }
+
 /* .flex{
   display: flex;
   align-items: center;
   justify-content: center;
 } */
-.child span{
+.child span {
   display: inline-block;
   /* transform: translateX(100%); */
   /* transform: scale(0.5);  */
@@ -53,16 +58,18 @@ code {
 .nav__dropdown__button {
   display: none;
 }
+
 @media only screen and (max-width: 480px) {
   .nav__items__container {
-     display: none;
+    display: none;
   }
+
   .nav__admin__button {
-     display: none;
+    display: none;
   }
 
   .nav__dropdown__button {
-     display: flex;
+    display: flex;
   }
 }
 
@@ -72,6 +79,7 @@ code {
   top: 4rem;
   margin-bottom: 2rem;
 }
+
 .nav__dropdown__item {
   background-color: #18181b;
   position: relative;
@@ -84,32 +92,41 @@ code {
   justify-content: center;
   border-bottom: 1px solid gray;
 }
-code{
+
+code {
   background: #000;
-  color:  white;
+  color: white;
   padding: 2;
 }
-pre{
+
+pre {
   background-color: #000;
   color: white;
   padding: 2px;
 }
+
 /* Style for unordered list */
 ul {
-  list-style-type: disc; /* Change bullet style */
-  padding-left: 20px; /* Adjust left padding */
+  list-style-type: disc;
+  /* Change bullet style */
+  padding-left: 20px;
+  /* Adjust left padding */
 }
 
 /* Style for ordered list */
 ol {
-  list-style-type: decimal; /* Change numbering style */
-  padding-left: 20px; /* Adjust left padding */
+  list-style-type: decimal;
+  /* Change numbering style */
+  padding-left: 20px;
+  /* Adjust left padding */
 }
 
 /* Style for list items */
 li {
-  margin-bottom: 5px; /* Adjust margin between list items */
+  margin-bottom: 5px;
+  /* Adjust margin between list items */
 }
+
 /* Enhance headings inside prose */
 /* Blog Content Prose Styling */
 /* Blog Content Styling */
@@ -184,6 +201,7 @@ li {
 .blog-content {
   @apply bg-zinc-800 p-8 rounded-lg shadow-lg border border-green-400;
 }
+
 /* Projects Component */
 .slick-prev,
 .slick-next {
@@ -193,17 +211,20 @@ li {
 }
 
 .slick-dots li button:before {
-  color: #4ade80; /* Green dots */
+  color: #4ade80;
+  /* Green dots */
   opacity: 0.5;
 }
 
 .slick-dots li.slick-active button:before {
-  color: #21c55d; /* Active dot */
+  color: #21c55d;
+  /* Active dot */
   opacity: 1;
 }
 
 .project {
-  background: #1f2937; /* zinc-800 */
+  background: #1f2937;
+  /* zinc-800 */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
@@ -211,4 +232,18 @@ li {
 .project:hover {
   transform: scale(1.03);
   transition: all 0.3s ease;
+}
+
+.markdown-cell {
+  background: transparent;
+  /* Or very light gray */
+  padding: 0 0;
+  /* reduce padding */
+  margin: 0;
+  /* remove margin */
+  font-size: 1.5rem;
+  /* smaller heading size */
+  line-height: 1.3;
+  border: none;
+  /* no box/border unless you want subtle one */
 }

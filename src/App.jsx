@@ -84,6 +84,8 @@ import UpdateSkill from "./components/Aboutpage/UpdateSkill";
 import UpdateEducation from "./components/Aboutpage/UpdateEducation";
 import Login from "./Pages/Login";
 import { useSelector } from "react-redux";
+import Learning from "./components/Blogpage/Learning";
+import CreateLearning from "./components/Blogpage/CreateLearning";
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -113,12 +115,14 @@ const App = () => {
           element={<PrivateRoute element={<Admin />} redirectTo="/login" />}
         />
         <Route path="/Blogs" element={<Resources />} />
+        <Route path="/learning/:topicId" element={<Learning />} />
         <Route path="Contact" element={<Contact />} />
         <Route path="/create-blog" element={<CreateBlog />} />
         <Route path="/note-update/:noteId" element={<UpdateNotes />} />
         <Route path="/blog/:blogId" element={<BlogDetails />} />
         <Route path="update-blog/:blogId" element={<UpdateBlog />} />
         <Route path="update-skill/:skillId" element={<UpdateSkill />} />
+        <Route path="/create-learning" element={<CreateLearning />} />
         <Route
           path="/update-education/:educationId"
           element={<UpdateEducation />}
