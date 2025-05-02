@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FileCode, FileText, FileImage } from "lucide-react";
 import { useDeleteLearningMutation, useGetLearningsQuery } from "../../features/learningsApiSlice"; // <-- important
+import { useSelector } from "react-redux";
 
 const Learnings = () => {
     const { data: learnings, isLoading, isError } = useGetLearningsQuery();
