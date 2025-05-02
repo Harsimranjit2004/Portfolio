@@ -5,26 +5,26 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDeleteProjectMutation } from "../../features/projectsApiSlice";
 
-const Project = ({id,  project }) => {
+const Project = ({ id, project }) => {
 
   const navigate = useNavigate();
-     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-     const handleUpdateButton = () => {
-        navigate(`/project-update/${id}`);
-     };
-        const [deleteProject] = useDeleteProjectMutation();
-     const handleDelete = () => {
-        deleteProject({ id });
-     };
-console.log(project)
-  // Split technologies into an array for better rendering
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const handleUpdateButton = () => {
+    navigate(`/project-update/${id}`);
+  };
+  const [deleteProject] = useDeleteProjectMutation();
+  const handleDelete = () => {
+    deleteProject({ id });
+  };
+  console.log(project)
+
   const technologies = Array.isArray(project.technologiesUsed)
-  ? project.technologiesUsed
-  : typeof project.technologiesUsed === "string"
-  ? project.technologiesUsed
-      .split(",")
-      .map((tech) => tech.trim()) // Clean up whitespace
-  : ["N/A"];
+    ? project.technologiesUsed
+    : typeof project.technologiesUsed === "string"
+      ? project.technologiesUsed
+        .split(",")
+        .map((tech) => tech.trim()) // Clean up whitespace
+      : ["N/A"];
 
 
   return (
@@ -62,7 +62,7 @@ console.log(project)
             <strong className="text-green-400">Status:</strong>{" "}
             {project.status || "In Progress"}
           </li>
-          
+
         </ul>
 
         {/* Know More Button */}
@@ -75,21 +75,21 @@ console.log(project)
           </button>
         </div>
         {isAuthenticated && (
-               <div className="flex gap-5 mt-2">
-               <button
-                 className="bg-green-500 p-2 rounded-full"
-                 onClick={handleDelete}
-               >
-                 Delete
-               </button>
-               <button
-                 className="bg-green-500 p-2 rounded-full"
-                 onClick={handleUpdateButton}
-               >
-                 Update
-               </button>
-             </div>
-            )}
+          <div className="flex gap-5 mt-2">
+            <button
+              className="bg-green-500 p-2 rounded-full"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+            <button
+              className="bg-green-500 p-2 rounded-full"
+              onClick={handleUpdateButton}
+            >
+              Update
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

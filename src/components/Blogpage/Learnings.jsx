@@ -42,6 +42,17 @@ const Learnings = () => {
                                 <span>{topic.files?.length || 0} files</span>
                             </div>
                         </div>
+                        {isAuthenticated && (
+                            <div className="flex gap-5 mt-2">
+                                <button
+                                    className="bg-green-500 p-2 rounded-full"
+                                    onClick={handleDelete}
+                                >
+                                    Delete
+                                </button>
+
+                            </div>
+                        )}
                     </Link>
                 ))}
             </div>

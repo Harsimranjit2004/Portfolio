@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FileCode, FileText, FileImage, Book, ChevronRight, FileBarChart2, Presentation } from "lucide-react";
-import { useGetLearningsQuery } from "../../features/learningsApiSlice"; // <-- very important
+import { useDeleteLearningMutation, useGetLearningsQuery } from "../../features/learningsApiSlice"; // <-- very important
 import FileViewer from "./FileViewer";
+import { useSelector } from "react-redux";
 
 const LearningDetail = () => {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const { topicId } = useParams();
     const { data: learnings, isLoading, isError } = useGetLearningsQuery();
 
@@ -25,7 +27,10 @@ const LearningDetail = () => {
             </div>
         );
     }
-
+    const [deleteLearning] = useDeleteLearningMutation();
+    const handleDelete = () => {
+        deleteLearning({ topicId })
+    }
     const topic = learnings.entities[topicId];
     const currentFile = topic.files[activeFile];
 
@@ -95,6 +100,7 @@ const LearningDetail = () => {
                 <div className="flex-1 overflow-auto p-4 animate-fadeIn">
                     <FileViewer file={currentFile} />
                 </div>
+
             </div>
         </div>
     );
