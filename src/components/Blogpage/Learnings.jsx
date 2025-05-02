@@ -17,8 +17,9 @@ const Learnings = () => {
         });
     };
 
-    const handleDelete = (topicId) => {
-        deleteLearning({ topicId });
+    const handleDelete = (id) => {
+        console.log(id)
+        deleteLearning({ id });
     };
 
     if (isLoading) {
