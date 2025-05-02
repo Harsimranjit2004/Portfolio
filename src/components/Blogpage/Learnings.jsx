@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FileCode, FileText, FileImage } from "lucide-react";
-import { useGetLearningsQuery } from "../../features/learningsApiSlice"; // <-- important
+import { useDeleteLearningMutation, useGetLearningsQuery } from "../../features/learningsApiSlice"; // <-- important
 
 const Learnings = () => {
     const { data: learnings, isLoading, isError } = useGetLearningsQuery();
@@ -20,8 +20,13 @@ const Learnings = () => {
             day: "numeric",
         });
     };
-    const topics = Object.values(learnings.entities);
+    const [deleteLearning] = useDeleteLearningMutation();
+    const handleDelete = (topicId) => {
+        deleteLearning({ topicId });
+    };
 
+    const topics = Object.values(learnings.entities);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     return (
         <div className="min-h-screen bg-[#1e1e1e] text-white p-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -46,7 +51,7 @@ const Learnings = () => {
                             <div className="flex gap-5 mt-2">
                                 <button
                                     className="bg-green-500 p-2 rounded-full"
-                                    onClick={handleDelete}
+                                    onClick={() => handleDelete(topic.id)}
                                 >
                                     Delete
                                 </button>

@@ -27,10 +27,7 @@ const LearningDetail = () => {
             </div>
         );
     }
-    const [deleteLearning] = useDeleteLearningMutation();
-    const handleDelete = () => {
-        deleteLearning({ topicId })
-    }
+
     const topic = learnings.entities[topicId];
     const currentFile = topic.files[activeFile];
 
