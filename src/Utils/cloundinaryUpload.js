@@ -69,8 +69,7 @@ export default async function uploadImageToCloudinary(file) {
   const fd = new FormData();
   fd.append("file", file);
   fd.append("upload_preset", uploadPreset);
-  fd.append("use_filename", "true");         // use the uploaded file's name
-  fd.append("unique_filename", "true");      // force unique filename
+  // force unique filename
   fd.append("folder", "user-resumes");       // optional: avoid global filename conflicts
 
 
