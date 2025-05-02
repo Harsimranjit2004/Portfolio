@@ -6,7 +6,7 @@ import FileViewer from "./FileViewer";
 import { useSelector } from "react-redux";
 
 const LearningDetail = () => {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
     const { topicId } = useParams();
     const { data: learnings, isLoading, isError } = useGetLearningsQuery();
 
