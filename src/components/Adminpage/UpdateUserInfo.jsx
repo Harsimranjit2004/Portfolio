@@ -293,6 +293,7 @@ const UpdateUserInfo = () => {
               type="text"
               id="resume"
               name="resume"
+              value={formData?.resume}
               onChange={handleChange}
               className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             />
