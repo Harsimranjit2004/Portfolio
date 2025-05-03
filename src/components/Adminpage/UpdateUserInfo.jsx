@@ -290,7 +290,7 @@ const UpdateUserInfo = () => {
               Resume
             </label>
             <input
-              type="file"
+              type="text"
               id="resume"
               name="resume"
               onChange={handleChange}
