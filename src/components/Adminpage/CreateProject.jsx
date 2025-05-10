@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import uploadImageToCloudinary from "../../Utils/cloundinaryUpload";
 import { useAddNewProjectMutation } from "../../features/projectsApiSlice";
-uploadImageToCloudinary;
+
 const CreateProject = () => {
   const [addNewProject] = useAddNewProjectMutation();
   const [isUploading, setIsUploading] = useState(false);
@@ -291,7 +291,7 @@ const CreateProject = () => {
             </label>
             <input
               // disabled={isUploading}
-              type="file"
+              type="text"
               id="video"
               name="video"
               onChange={handleChange}

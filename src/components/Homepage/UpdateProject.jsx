@@ -308,7 +308,7 @@ const UpdateProject = () => {
             </label>
             <input
               // disabled={isUploading}
-              type="file"
+              type="text"
               id="video"
               name="video"
               onChange={handleChange}

@@ -155,7 +155,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* Video Section (if available) */}
-            {project.video && project.video.length > 0 && (
+            {/* {project.video && project.video.length > 0 && (
               <div className="bg-zinc-800 rounded-lg p-6 mb-8 shadow-lg">
                 <h2 className="text-2xl font-bold text-green-500 mb-4 flex items-center">
                   <FontAwesomeIcon icon={faPlayCircle} className="mr-2" />
@@ -171,7 +171,27 @@ const ProjectDetail = () => {
                   </video>
                 </div>
               </div>
+            )} */}
+            {project.video && project.video.length > 0 && (
+              <div className="bg-zinc-800 rounded-lg p-6 mb-8 shadow-lg">
+                <h2 className="text-2xl font-bold text-green-500 mb-4 flex items-center">
+                  <FontAwesomeIcon icon={faPlayCircle} className="mr-2" />
+                  <span>Demo Video</span>
+                </h2>
+                <div className="relative pt-[56.25%]"> {/* 16:9 aspect ratio */}
+                  <video
+                    controls
+                    className="absolute top-0 left-0 w-full h-full rounded-lg"
+                    poster={project.imageUrl || undefined} // optional thumbnail
+                  >
+                    <source src={project.video[0]} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
             )}
+
+
           </div>
 
           {/* Right Column - Project Details */}
