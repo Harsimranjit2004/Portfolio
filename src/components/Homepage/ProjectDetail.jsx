@@ -1,17 +1,23 @@
-import React from "react";
-import Navbar from "../Navbar";
-
-import {
-  projectApiSlice,
-  useGetProjectQuery,
-} from "../../features/projectsApiSlice";
-
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faCode,
+  faGlobe,
+  faCalendarAlt,
+  faTools,
+  faLightbulb,
+  faImages,
+  faPlayCircle,
+  faChevronLeft,
+  faChevronRight
+} from "@fortawesome/free-solid-svg-icons";
+import Navbar from "../Navbar";
+import { projectApiSlice } from "../../features/projectsApiSlice";
 
 const ProjectDetail = () => {
   const { projectId } = useParams();
@@ -20,240 +26,261 @@ const ProjectDetail = () => {
       project: data?.entities[projectId],
     }),
   });
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Custom arrows for slider
+  const NextArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <div
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-green-500 transition-all"
+        onClick={onClick}
+      >
+        <FontAwesomeIcon icon={faChevronRight} />
+      </div>
+    );
+  };
+
+  const PrevArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <div
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-green-500 transition-all"
+        onClick={onClick}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </div>
+    );
+  };
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-  };
-  const content = (
-    <div className="bg-zinc-900 text-white min-h-screen">
-      <Navbar isHomePage={"no"} />
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    beforeChange: (current, next) => setCurrentImageIndex(next),
+    customPaging: i => (
       <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        className="mt-[4rem] flex-col "
-      >
-        <div className="heading text-green-500 text-4xl">
-          <h1 className="text-center">{project?.title}</h1>
-        </div>
-        <div className=" md:w-[60vw] md:h-[40vh] w-[70vw] h-[30vh] bg-red-500 mt-[2rem]">
-          <img src={project?.imageUrl} className="w-full h-full object-cover" />
-        </div>
-        <div className="md:w-[60vw]  w-[70vw]  mt-[1rem] p-4">
-          <p>{project?.details}</p>
-        </div>
-        <div className="md:w-[60vw] w-[70vw] mt-[1rem]">
-          <span className="text-green-500 text-3xl">Highlights</span>
-          <ul className="list-disc ml-8 mb-4 ">
-            {project?.highlights.map((highlight, index) => (
-              <li className="pt-4 text-xl" key={index}>
-                {highlight}
-              </li>
-            ))}
-          </ul>
-        </div>
-        {project?.video && (
-          <div className="md:w-[60vw] w-[70vw] mt-[1rem]">
-            <h2 className="text-green-500 text-3xl ">Video:</h2>
-            {project?.video && (
-              <video
-                controls
-                muted
-                autoPlay
-                // infinite
-                className="w-full rounded-lg mb-4 pt-6"
-              >
-                <source src={project.video[0]} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            )}
-          </div>
-        )}
-        <div className="md:w-[60vw] w-[70vw] mt-[1rem]">
-          <h2 className="text-green-500 text-3xl">Technologies Used:</h2>
-          <ul className="list-disc ml-8 mb-4">
-            {project?.technologiesUsed.map((technology, index) => (
-              <li className=" pt-4 text-xl" key={index}>
-                {technology}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="md:w-[60vw] w-[70vw] mt-[1rem]">
-          <h2 className="text-green-500 text-3xl pb-4 ">ScreenShots:</h2>
-          <Slider {...settings}>
-            {project?.screenshots.map((screenshot, index) => (
-              <div key={index}>
-                <img
-                  src={screenshot}
-                  alt={`Screenshot ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
-        <div className="md:w-[60vw] w-[70vw] mt-[1rem] sm:flex justify-around mb-[2rem]">
-          <div className="flex flex-col align-center justify-center">
-            <h2 className="text-green-500 text-3xl pb-4 ">Code Link</h2>
-            <a href={project?.codeLink} target="_blank" rel="noreferrer">
-              <button
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                className="border-2 border-gray-300  text-white font-bold py-2 px-8 rounded  w-fit flex gap-4"
-                // onClick={() => navigate(`/project/${id}`)}
-              >
-                <div className="ml-1"> Link</div>
-                <FontAwesomeIcon icon={faArrowRight} />
-              </button>
-            </a>
-          </div>
+        className={`w-3 h-3 mx-1 rounded-full ${i === currentImageIndex ? "bg-green-500" : "bg-gray-500"
+          }`}
+        style={{ transition: "all 0.3s ease" }}
+      />
+    ),
+    dotsClass: "slick-dots custom-dots flex justify-center mt-4"
+  };
 
-          <div className="flex flex-col align-center justify-center">
-            <h2 className="text-green-500 text-3xl pb-4 ">Project Link</h2>
-            <a href={project?.projectLink} target="_blank" rel="noreferrer">
-              <button
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                className="border-2 border-gray-300  text-white w-fit font-bold py-2 px-8 rounded  flex gap-4"
-                // onClick={}
-              >
-                <div className="ml-1"> Link</div>
-                <FontAwesomeIcon icon={faArrowRight} />
-              </button>
-            </a>
+  if (!project) {
+    return (
+      <div className="bg-zinc-900 text-white min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-2xl text-green-500">Loading project details...</div>
+      </div>
+    );
+  }
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  return (
+    <div className="bg-zinc-900 text-white min-h-screen">
+      <Navbar isHomePage="no" />
+
+      {/* Hero Section */}
+      <div className="relative w-full h-96 overflow-hidden">
+        <div className="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
+        <img
+          src={project.imageUrl}
+          alt={project.title}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center px-4">{project.title}</h1>
+          <div className="flex flex-wrap justify-center gap-4 mt-4">
+            {project.technologiesUsed.slice(0, 5).map((tech, index) => (
+              <span key={index} className="bg-green-500 bg-opacity-80 text-white px-3 py-1 rounded-full text-sm">
+                {tech}
+              </span>
+            ))}
+            {project.technologiesUsed.length > 5 && (
+              <span className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm">
+                +{project.technologiesUsed.length - 5} more
+              </span>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Left Column */}
+          <div className="md:col-span-2">
+            {/* Project Overview */}
+            <div className="bg-zinc-800 rounded-lg p-6 mb-8 shadow-lg transform transition-all hover:shadow-green-500/20">
+              <h2 className="text-2xl font-bold text-green-500 mb-4 flex items-center">
+                <span className="mr-2">Project Overview</span>
+              </h2>
+              <p className="text-gray-300 leading-relaxed">{project.details}</p>
+            </div>
+
+            {/* Screenshots */}
+            <div className="bg-zinc-800 rounded-lg p-6 mb-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-green-500 mb-4 flex items-center">
+                <FontAwesomeIcon icon={faImages} className="mr-2" />
+                <span>Screenshots</span>
+              </h2>
+              <div className="mb-8">
+                <Slider {...settings}>
+                  {project.screenshots.map((screenshot, index) => (
+                    <div key={index} className="px-1">
+                      <img
+                        src={screenshot}
+                        alt={`Screenshot ${index + 1}`}
+                        className="w-full h-64 md:h-96 object-cover rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </div>
+
+            {/* Video Section (if available) */}
+            {project.video && project.video.length > 0 && (
+              <div className="bg-zinc-800 rounded-lg p-6 mb-8 shadow-lg">
+                <h2 className="text-2xl font-bold text-green-500 mb-4 flex items-center">
+                  <FontAwesomeIcon icon={faPlayCircle} className="mr-2" />
+                  <span>Demo Video</span>
+                </h2>
+                <div className="relative pt-[56.25%]">
+                  <video
+                    controls
+                    className="absolute top-0 left-0 w-full h-full rounded-lg"
+                  >
+                    <source src={project.video[0]} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Right Column - Project Details */}
+          <div>
+            {/* Project Links */}
+            <div className="bg-zinc-800 rounded-lg p-6 mb-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-green-500 mb-4">Project Links</h2>
+              <div className="flex flex-col gap-4">
+                {project.projectLink && (
+                  <a
+                    href={project.projectLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center transition-all"
+                  >
+                    <FontAwesomeIcon icon={faGlobe} className="mr-2" />
+                    <span>Live Demo</span>
+                  </a>
+                )}
+
+                {project.codeLink && (
+                  <a
+                    href={project.codeLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="bg-zinc-700 hover:bg-zinc-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center transition-all"
+                  >
+                    <FontAwesomeIcon icon={faCode} className="mr-2" />
+                    <span>Source Code</span>
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Project Details */}
+            <div className="bg-zinc-800 rounded-lg p-6 mb-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-green-500 mb-4">Project Details</h2>
+
+              {project.status && (
+                <div className="mb-4">
+                  <div className="text-gray-400">Status</div>
+                  <div className="flex items-center">
+                    <span className={`inline-block w-3 h-3 rounded-full mr-2 ${project.status.toLowerCase() === 'completed' ? 'bg-green-500' :
+                      project.status.toLowerCase() === 'in progress' ? 'bg-yellow-500' : 'bg-blue-500'
+                      }`}></span>
+                    <span>{project.status}</span>
+                  </div>
+                </div>
+              )}
+
+              {project.creationDate && (
+                <div className="mb-4">
+                  <div className="text-gray-400">Creation Date</div>
+                  <div className="flex items-center">
+                    <FontAwesomeIcon icon={faCalendarAlt} className="mr-2 text-gray-500" />
+                    <span>{formatDate(project.creationDate)}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Technologies Used */}
+              <div className="mb-4">
+                <div className="text-gray-400 mb-2 flex items-center">
+                  <FontAwesomeIcon icon={faTools} className="mr-2" />
+                  <span>Technologies Used</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologiesUsed.map((tech, index) => (
+                    <span key={index} className="bg-zinc-700 px-3 py-1 rounded-full text-sm">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Project Highlights */}
+            <div className="bg-zinc-800 rounded-lg p-6 shadow-lg">
+              <h2 className="text-2xl font-bold text-green-500 mb-4 flex items-center">
+                <FontAwesomeIcon icon={faLightbulb} className="mr-2" />
+                <span>Highlights</span>
+              </h2>
+              <ul className="space-y-3">
+                {project.highlights.map((highlight, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="inline-flex items-center justify-center bg-green-500 rounded-full min-w-6 h-6 text-white font-medium text-sm mr-3 mt-0.5">
+                      {index + 1}
+                    </span>
+                    <span className="text-gray-300">{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Back to Projects Button */}
+      <div className="container mx-auto px-4 pb-12 flex justify-center">
+        <a
+          href="/projects"
+          className="flex items-center bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+        >
+          <FontAwesomeIcon icon={faChevronLeft} className="mr-2" />
+          <span>Back to All Projects</span>
+        </a>
+      </div>
     </div>
   );
-  return content;
-  <div className="bg-zinc-900 text-white min-h-screen">
-    <Navbar isHomePage={"no"} />
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-4">{project?.title}</h1>
-      <p className="mb-4">{project?.description}</p>
-
-      <h2 className="text-xl font-bold mb-2">Highlights:</h2>
-      <ul className="list-disc ml-8 mb-4">
-        {project?.highlights.map((highlight, index) => (
-          <li key={index}>{highlight}</li>
-        ))}
-      </ul>
-
-      <h2 className="text-xl font-bold mb-2">Screenshots:</h2>
-      <Carousel
-        additionalTransfrom={0}
-        arrows
-        autoPlaySpeed={3000}
-        centerMode={false}
-        className=""
-        containerClass="carousel-container"
-        dotListClass=""
-        draggable
-        focusOnSelect={false}
-        infinite
-        itemClass="carousel-item"
-        keyBoardControl
-        minimumTouchDrag={80}
-        renderButtonGroupOutside={false}
-        renderDotsOutside={false}
-        responsive={{
-          desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 3,
-            partialVisibilityGutter: 40,
-          },
-          mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1,
-            partialVisibilityGutter: 30,
-          },
-          tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2,
-            partialVisibilityGutter: 30,
-          },
-        }}
-        showDots={false}
-        sliderClass=""
-        slidesToSlide={1}
-        swipeable
-      >
-        {project?.screenshots.map((screenshot, index) => (
-          <div key={index} className="carousel-image-container">
-            <img
-              src={screenshot}
-              alt={`Screenshot ${index + 1}`}
-              className="w-full rounded-lg"
-            />
-          </div>
-        ))}
-      </Carousel>
-
-      <h2 className="text-xl font-bold mb-2">Video:</h2>
-      {project?.video && (
-        <video controls muted className="w-full rounded-lg mb-4">
-          <source src={project.video[0]} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      )}
-
-      <h2 className="text-xl font-bold mb-2">More Details:</h2>
-      <p>{project?.details}</p>
-
-      <h2 className="text-xl font-bold mb-2">Links:</h2>
-      {project?.projectLink && (
-        <p>
-          <strong>Project Link:</strong>{" "}
-          <a
-            href={project?.projectLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {project?.projectLink}
-          </a>
-        </p>
-      )}
-      {project?.codeLink && (
-        <p>
-          <strong>Code Link:</strong>{" "}
-          <a
-            href={project?.codeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-zinc-900 text-white py-2 px-4 rounded-lg hover:bg-green-500 transition-colors"
-          >
-            View Code
-          </a>
-        </p>
-      )}
-
-      <h2 className="text-xl font-bold mb-2">Technologies Used:</h2>
-      <ul className="list-disc ml-8 mb-4">
-        {project?.technologiesUsed.map((technology, index) => (
-          <li key={index}>{technology}</li>
-        ))}
-      </ul>
-
-      <h2 className="text-xl font-bold mb-2">Status:</h2>
-      <p>{project?.status}</p>
-
-      <h2 className="text-xl font-bold mb-2">Creation Date:</h2>
-      <p>{new Date(project?.creationDate).toLocaleDateString()}</p>
-    </div>
-  </div>;
 };
 
 export default ProjectDetail;
