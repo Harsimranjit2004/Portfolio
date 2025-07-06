@@ -178,18 +178,33 @@ const ProjectDetail = () => {
                   <FontAwesomeIcon icon={faPlayCircle} className="mr-2" />
                   <span>Demo Video</span>
                 </h2>
-                <div className="relative pt-[56.25%]"> {/* 16:9 aspect ratio */}
-                  <video
-                    controls
-                    className="absolute top-0 left-0 w-full h-full rounded-lg"
-                    poster={project.imageUrl || undefined} // optional thumbnail
-                  >
-                    <source src={project.video[0]} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                <div className="relative pt-[56.25%]">
+                  {project.video[0].includes("youtube.com") ||
+                    project.video[0].includes("youtu.be") ? (
+                    <iframe
+                      src={`${project.video[0]}?autoplay=1&rel=0&modestbranding=1&controls=1`}
+                      title="Project Demo"
+                      allow="autoplay; encrypted-media; clipboard-write; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute top-0 left-0 w-full h-full rounded-lg"
+                    ></iframe>
+                  ) : (
+                    <video
+                      controls
+                      autoPlay
+                      muted
+                      className="absolute top-0 left-0 w-full h-full rounded-lg"
+                      poster={project.imageUrl || undefined}
+                    >
+                      <source src={project.video[0]} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
                 </div>
               </div>
             )}
+
+
 
 
           </div>

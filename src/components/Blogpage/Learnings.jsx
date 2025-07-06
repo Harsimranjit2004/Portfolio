@@ -1,3 +1,78 @@
+// import { Link } from "react-router-dom";
+// import { FileCode, FileText, FileImage } from "lucide-react";
+// import { useDeleteLearningMutation, useGetLearningsQuery } from "../../features/learningsApiSlice"; // <-- important
+// import { useSelector } from "react-redux";
+
+// const Learnings = () => {
+//     const { data: learnings, isLoading, isError } = useGetLearningsQuery();
+//     const [deleteLearning] = useDeleteLearningMutation();
+//     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+//     const formatDate = (isoString) => {
+//         const date = new Date(isoString);
+//         return date.toLocaleDateString("en-US", {
+//             year: "numeric",
+//             month: "short",
+//             day: "numeric",
+//         });
+//     };
+
+//     const handleDelete = (id) => {
+//         console.log(id)
+//         deleteLearning({ id });
+//     };
+
+//     if (isLoading) {
+//         return <div className="min-h-screen flex items-center justify-center text-white">Loading...</div>;
+//     }
+
+//     if (isError) {
+//         return <div className="min-h-screen flex items-center justify-center text-white">Failed to load learnings.</div>;
+//     }
+
+//     const topics = Object.values(learnings.entities);
+
+//     return (
+//         <div className="min-h-screen bg-[#1e1e1e] text-white p-10">
+//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+//                 {topics.map((topic) => (
+//                     <div
+//                         key={topic.id}
+//                         className="bg-[#252525] border border-gray-700 rounded-lg p-6 hover:border-green-400 transition-all hover:transform hover:scale-105"
+//                     >
+//                         <Link to={`/learning/${topic.id}`}>
+//                             <div className="flex flex-col items-center">
+//                                 <div className="bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+//                                     <FileCode className="w-8 h-8" />
+//                                 </div>
+//                                 <h3 className="text-xl font-medium mb-2 text-center">{topic.title}</h3>
+//                                 <p className="text-gray-400 text-sm mb-2">{topic.category || "Uncategorized"}</p>
+//                                 <div className="flex justify-between w-full text-xs text-gray-400 mt-4">
+//                                     <span>{formatDate(topic.updatedAt) || "Unknown date"}</span>
+//                                     <span>{topic.files?.length || 0} files</span>
+//                                 </div>
+//                             </div>
+//                         </Link>
+//                         {isAuthenticated && (
+//                             <div className="flex gap-5 mt-2 justify-center">
+//                                 <button
+//                                     className="bg-green-500 px-4 py-1 rounded-full"
+//                                     onClick={() => handleDelete(topic.id)}
+//                                 >
+//                                     Delete
+//                                 </button>
+//                             </div>
+//                         )}
+//                     </div>
+//                 ))}
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default Learnings
+
+
 import { Link } from "react-router-dom";
 import { FileCode, FileText, FileImage } from "lucide-react";
 import { useDeleteLearningMutation, useGetLearningsQuery } from "../../features/learningsApiSlice"; // <-- important
@@ -23,40 +98,52 @@ const Learnings = () => {
     };
 
     if (isLoading) {
-        return <div className="min-h-screen flex items-center justify-center text-white">Loading...</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center text-white px-4">
+                Loading...
+            </div>
+        );
     }
 
     if (isError) {
-        return <div className="min-h-screen flex items-center justify-center text-white">Failed to load learnings.</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center text-white px-4">
+                Failed to load learnings.
+            </div>
+        );
     }
 
     const topics = Object.values(learnings.entities);
 
     return (
-        <div className="min-h-screen bg-[#1e1e1e] text-white p-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="min-h-screen bg-[#1e1e1e] text-white p-4 sm:p-6 md:p-8 lg:p-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {topics.map((topic) => (
                     <div
                         key={topic.id}
-                        className="bg-[#252525] border border-gray-700 rounded-lg p-6 hover:border-green-400 transition-all hover:transform hover:scale-105"
+                        className="bg-[#252525] border border-gray-700 rounded-lg p-4 sm:p-6 hover:border-green-400 transition-all hover:transform hover:scale-105"
                     >
                         <Link to={`/learning/${topic.id}`}>
                             <div className="flex flex-col items-center">
-                                <div className="bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                                    <FileCode className="w-8 h-8" />
+                                <div className="bg-blue-500 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+                                    <FileCode className="w-6 h-6 sm:w-8 sm:h-8" />
                                 </div>
-                                <h3 className="text-xl font-medium mb-2 text-center">{topic.title}</h3>
-                                <p className="text-gray-400 text-sm mb-2">{topic.category || "Uncategorized"}</p>
-                                <div className="flex justify-between w-full text-xs text-gray-400 mt-4">
+                                <h3 className="text-lg sm:text-xl font-medium mb-2 text-center line-clamp-2">
+                                    {topic.title}
+                                </h3>
+                                <p className="text-gray-400 text-xs sm:text-sm mb-2 text-center">
+                                    {topic.category || "Uncategorized"}
+                                </p>
+                                <div className="flex justify-between w-full text-xs text-gray-400 mt-3 sm:mt-4">
                                     <span>{formatDate(topic.updatedAt) || "Unknown date"}</span>
                                     <span>{topic.files?.length || 0} files</span>
                                 </div>
                             </div>
                         </Link>
                         {isAuthenticated && (
-                            <div className="flex gap-5 mt-2 justify-center">
+                            <div className="flex gap-3 sm:gap-5 mt-3 sm:mt-2 justify-center">
                                 <button
-                                    className="bg-green-500 px-4 py-1 rounded-full"
+                                    className="bg-green-500 px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm hover:bg-green-600 transition-colors"
                                     onClick={() => handleDelete(topic.id)}
                                 >
                                     Delete
@@ -70,4 +157,4 @@ const Learnings = () => {
     );
 };
 
-export default Learnings
+export default Learnings;
